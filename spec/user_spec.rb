@@ -77,6 +77,12 @@ describe JibJob::User do
       user.should have(0).resumes
     end
     
+    it "should have no API keys" do
+      user = JibJob::User.create(@valid_attributes)
+      user.should have(0).api_keys
+      user.has_api_key?.should be_false
+    end
+    
     it "should require a username" do
       user = JibJob::User.new(@valid_attributes)
       user.username = nil
@@ -204,6 +210,33 @@ describe JibJob::User do
       user.password_confirmation = "secret"
       user.should be_valid
       user.save.should be_true
+    end
+  end
+  
+  describe "API keys" do
+    it "should create API keys" do
+      user = JibJob::User.create(@valid_attributes)
+      api_key = user.api_keys.new
+      api_key.value = "TESTKEY"
+      api_key.should be_valid
+      api_key.save.should be_true
+      user.has_api_key?.should be_true
+    end
+    
+    it "should determine API key user" do
+      user = JibJob::User.create(@valid_attributes)
+      user.api_keys.create(:value => "TESTKEY")
+      JibJob::APIKey.user_of("TESTKEY").should == user
+      JibJob::APIKey.user_of("INVALID").should be_nil
+    end
+    
+    it "should not allow duplicate key values" do
+      user = JibJob::User.create(@valid_attributes)
+      k1 = user.api_keys.create!(:value => "TESTKEY")
+      k2 = user.api_keys.new(:value => "TESTKEY")
+      k2.should_not be_valid
+      k2.value = "TESTKEY2"
+      k2.should be_valid
     end
   end
 

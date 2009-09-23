@@ -13,6 +13,7 @@ module JibJob
     property :agreed_terms, String    
     
     has n, :resumes, :model => "JibJob::Resume", :child_key => [:user_id]
+    has n, :api_keys, :model => "JibJob::APIKey"
     
     validates_present :username, :message => "A username is required"
     validates_present :email, :message => "An e-mail is required"
@@ -57,6 +58,10 @@ module JibJob
       self.resume_count < 10
     end
     
+    def has_api_key?
+      self.api_keys.count > 0
+    end
+    
     def self.authenticate(username, password)
       user = self.first(:username => username)
       return nil if (user.nil? || (BCrypt::Password.new(user.crypted_password) != password))
@@ -84,4 +89,19 @@ module JibJob
 
   end
   
+  class APIKey
+    include DataMapper::Resource
+    storage_names[:default] = 'api_keys'
+    property :id, Serial, :writer => :protected
+    property :value, String
+    belongs_to :user, :model => "JibJob::User"
+    
+    validates_present :value
+    validates_is_unique :value
+    
+    def self.user_of(value)
+      api_key = self.first(:value => value)
+      api_key.user if api_key
+    end
+  end
 end

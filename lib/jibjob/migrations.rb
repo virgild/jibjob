@@ -77,10 +77,10 @@ module JibJob
         execute(<<-SQL)
           CREATE TABLE IF NOT EXISTS `api_keys` (
             `id` SERIAL,
-            `key` VARCHAR(64) NOT NULL,
+            `value` VARCHAR(64) NOT NULL,
             `user_id` BIGINT NOT NULL,
             KEY `api_keys_id_index` (`user_id`),
-            UNIQUE KEY `api_keys_key_index` (`key`)
+            UNIQUE KEY `api_keys_value_index` (`value`)
           )
           ENGINE = InnoDB
           DEFAULT CHARSET = utf8;
