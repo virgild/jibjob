@@ -15,3 +15,5 @@
     %div{:style => "height:30px"}
     #container
       = yield
+    .preview_footer
+      %a.powered{:href => "http://#{request.host}:#{request.port}"}
