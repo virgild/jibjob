@@ -143,15 +143,6 @@ describe JibJob::App do
       status.should == 200
       location.should == "/register"
     end
-    
-    it "should not display registration page when user is logged in" do
-      create_valid_user
-      login
-      
-      get "/register", {}, 'rack.session' => { :user => "tester" }
-      follow_redirect!
-      location.should == "/"
-    end
   end
   
   describe "resume" do
