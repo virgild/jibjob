@@ -1,1 +1,14 @@
-This project is being prepared for public consumption.
+JibJob
+
+by Virgil Dimaguila <virgild>
+
+
+JibJob is a Sinatra web app for distributing your online resume and exporting them in various formats.
+
+The code is still in cleanup stage and has the following limitations:
+  * The data migration code is for MySQL only. Although there is no MySQL specific SQL in the DataMapper models.
+    Still waiting for dm-migrations to stabilize a bit.
+  * Lots of untested/uncovered code--mostly in the controllers. Too lazy to mock (yet).
+
+
+Please send feedback.
