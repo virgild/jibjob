@@ -1,5 +1,5 @@
 require 'dm-migrations'
-require 'migration_runner'
+require 'dm-migrations/migration_runner'
 
 module JibJob
   def self.migrate_db
