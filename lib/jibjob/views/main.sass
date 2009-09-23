@@ -147,7 +147,11 @@ div.ribbon
           background-color: #B7232C
           border: solid 1px #B7232C
           color: #fff
-
+          
+#container.public
+  margin-top: 10px
+  background = !background_color
+  
 #footer
   +acts_like_container
   background-color = !bgcolor * 1.2
@@ -477,20 +481,41 @@ h3.head
 .para
   margin: 5px 0 20px 0
 
-.publicview
-  .panel
-    background-color = !background_color
-    color: #fff
-    ul
-      position: relative
-      background-color: #666
-      height: 32px
-      li
-        float: left
-        a
-          display: block
-          padding: 5px 10px
-          color: #fff
+.public_panel
+  padding: 10px
+  margin-bottom: 10px
+  background: url('/images/head_panel_bg.png') no-repeat top
+  -webkit-border-radius: 8px
+  -moz-border-radius: 8px
+  color: #fff
+  ul
+    height: 48px
+    li
+      float: left
+      a
+        display: block
+        color: #fff
+  ul.sizer
+    padding-left: 10px
+    li
+      a
+        padding: 0
+        margin-top: 10px
+        margin-right: 10px
+      a#increaser
+        background: url('/images/plus.png') no-repeat
+        width: 32px
+        height: 32px
+      a#decreaser
+        background: url('/images/minus.png') no-repeat
+        width: 32px
+        height: 32px
+        
+  ul.formats
+    float: right
+    li
+      a
+        margin-right: 5px
 
 .preview_footer
   margin: 10px auto

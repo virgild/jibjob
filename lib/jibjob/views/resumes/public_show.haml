@@ -1,18 +1,17 @@
-.publicview
-  .panel
-    %ul
-      %li
-        %a{:href => "/view/#{@resume.slug}.pdf"} Download PDF
-      %li
-        %a{:href => "/view/#{@resume.slug}.txt"} Download Text
-    %ul
-      %li
-        %a#increaser{:href => "#"} +
-      %li
-        %a#decreaser{:href => "#"} -
-      %li
-        %a#resetter{:href => "#"} [R]
-
+.public_panel
+  %ul.formats
+    %li
+      %a{:href => "/view/#{@resume.slug}.pdf"}
+        %img{:src => "/images/pdf.png", :width => "48", :height => "48", :title => "Download as PDF"}
+    %li
+      %a{:href => "/view/#{@resume.slug}.txt"}
+        %img{:src => "/images/plain_text.png", :width => "48", :height => "48", :title => "Download as Plain Text"}
+  %ul.sizer
+    %li
+      %a#increaser{:href => "#"}
+    %li
+      %a#decreaser{:href => "#"}
+      
 = haml("resumes/_preview".to_sym, :layout => false, :locals => { :resume => @resume })
 
 :javascript

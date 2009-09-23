@@ -12,8 +12,7 @@
       %script{ :type => "text/javascript", :src => "/js/#{js}.js" }
 
   %body  
-    %div{:style => "height:30px"}
-    #container
+    #container.public
       = yield
     .preview_footer
       %a.powered{:href => "http://#{request.host}:#{request.port}"}
