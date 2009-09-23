@@ -1,0 +1,27 @@
+.preview
+  .resume
+    .header
+      %h1 #{h resume.full_name}
+      - resume.header_lines.each do |line|
+        %div #{h line}
+
+    - resume.sections.each do |section|
+      .section
+        %h2 #{h section.title}
+        - if section.para
+          %p
+            = h section.para
+        - unless section.items.empty?
+          %ul
+            - section.items.each do |item|
+              %li= h item.text
+
+        - section.periods.each do |period|
+          .period
+            .details
+              %h3  #{h period.title}
+              %div #{h period_line(period)}
+
+            %ul
+              - period.items.each do |item|
+                %li= h item.text

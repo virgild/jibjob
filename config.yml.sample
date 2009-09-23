@@ -1,0 +1,33 @@
+:development:
+  :db:
+    :adapter: mysql
+    :database:
+    :username:
+    :host:
+  :cookie_domain: 
+  :cookie_secret: 
+  :email:
+    :noreply: no-reply@local
+  
+:test:
+  :db:
+    :adapter: mysql
+    :database:
+    :username:
+    :host:
+  :cookie_domain: 
+  :cookie_secret:
+  :email:
+    :noreply: no-reply@local
+  
+:production:
+  :db:
+    :adapter: mysql
+    :database:
+    :host:
+    :username: 
+    :password: 
+  :cookie_domain: 
+  :cookie_secret: 
+  :email:
+    :noreply: no-reply@local

@@ -1,0 +1,493 @@
+!background_color = hsl(0, 0%, 20%)
+!bgcolor = !background_color
+!theme_color1 = #f1f1f1
+!theme_color2 = #ccc
+!notification_success_color = #5F994B
+
+!default_fonts = "Arial, Helvetica, sans-serif"
+!nice_fonts = "Bell Gothic Std, Trebuchet MS, Helvetica, Arial, sans-serif"
+!monospace_fonts = "Monaco, Courier New, Courier, monospace"
+!default_text_size = 12px
+
+!pagewidth = 800px
+
+=acts_like_container
+  margin-left: auto
+  margin-right: auto
+  width = !pagewidth
+  background-color: #fff
+
+=shadowed-text
+  text-shadow: -1px 1px #{!bgcolor * 1.1}
+
+h1, h2, h3, h4, h5
+  font-weight: bold
+  font-family = !nice_fonts
+
+h1
+  font-size: 22px
+h2
+  font-size: 20px
+h3
+  font-size: 18px
+h4
+  font-size: 16px
+h5
+  font-size: 14px
+
+div.clear
+  clear: both
+
+.centered
+  text-align: center
+
+html
+  background-color = !bgcolor
+
+body
+  background-color = !bgcolor
+  font-family = !default_fonts
+  font-size = !default_text_size
+
+div.ribbon
+  z-index: 1
+  width: 72px
+  height: 72px
+  background: url("/images/alpha.png") no-repeat
+  float: right
+
+#header
+  +acts_like_container
+  background-color = !bgcolor * 1.5
+  min-height: 72px
+  position: relative
+  
+  a.logo
+    position: absolute
+    left: 30px
+    top: 8px
+    display: block
+    border: none
+    background: url('/images/logo.png') no-repeat
+    width: 98px
+    height: 42px
+    h1
+      display: none
+  p.sub
+    position: absolute
+    +shadowed-text
+    left: 32px
+    top: 48px
+    font-family = !nice_fonts
+    color = !bgcolor * 2.5
+  ul
+    position: absolute
+    left: 250px
+    top: 38px
+    height: 32px
+    li
+      float: left
+      a
+        +shadowed-text
+        display: block
+        padding: 10px
+        color: #fff
+        text-decoration: none
+        font-size: 14px
+        font-family = !nice_fonts
+        font-weight: bold
+        &:hover
+          text-decoration: underline
+          color: #ddd
+        &:active
+          outline: none
+        &:focus
+          background-color: #333
+          outline: none
+  
+#container
+  +acts_like_container
+  position: relative
+  
+  .content
+    padding: 20px
+  
+  .header
+    padding: 20px
+    border-bottom: solid 1px #eee
+    padding-bottom: 10px
+    background: url('/images/headerbg.png') repeat-x
+    h1
+      font-size: 20px
+    h2
+      font-size: 14px
+    ul.toolbar
+      float: right
+      position: relative
+      height: 32px
+      li
+        float: left
+        a
+          font-size: 12px
+          font-weight: bold
+          padding: 4px 8px
+          margin-right: 8px
+          display: block
+          text-decoration: none
+          color: #2B4499
+          background: url('/images/btnback.png') repeat-x
+          border: solid 1px #ddd
+          &:hover
+            color: #990C03
+            background-image: none
+            background-color: #efefef
+            border: solid 1px #ccc
+        a.alert
+          background-image: none
+          background-color: #B7232C
+          border: solid 1px #B7232C
+          color: #fff
+
+#footer
+  +acts_like_container
+  background-color = !bgcolor * 1.2
+  text-align: center
+  min-height: 50px
+  padding-top: 10px
+  color: #fff
+  border:
+    bottom: solid 2px #444
+  a
+    color: #e6e6e6
+
+ul.nicelist
+  li
+    padding: 10px
+    -webkit-border-radius: 10px
+    -moz-border-radius: 10px
+    border: solid 1px #ddd
+    margin-bottom: 10px
+    a
+      color = !bgcolor
+      &:hover
+        color = hsl(0, 90, 40)
+    a.name
+      font-family = !nice_fonts
+      font-size: 18px
+      font-weight: bold
+      text-decoration: none
+      &:hover
+        text-decoration: underline
+    .buttons
+      float: right
+      a
+        border: solid 1px #ccc
+        text-decoration: none
+        padding: 3px 10px
+        margin: 0 3
+    .details
+      float: left
+      width: 100%
+      margin-top: 8px
+      line-height: 18px
+
+.preview
+  position: relative
+  background-color: #ccc
+  padding: 20px
+  
+  .resume
+    padding: 50px
+    padding-top: 20px
+    background-color: #fff
+    .header
+      border-bottom: none !important
+      text-align: center
+      margin-bottom: 30px
+      background: none !important
+    .section
+      margin-bottom: 30px
+      h2
+        margin-bottom: 10px
+      p
+        text-align: justify
+      .period
+        margin-left: 10px
+        margin-bottom: 20px
+        .details
+          font-size: 14px
+    ul
+      li
+        list-style-type: disc
+        margin-left: 30px
+        padding-top: 5px
+        text-align: justify
+
+.debug_panel
+  +acts_like_container
+  a.panelbutton
+    font-size: 14px
+    font-weight: bold
+    display: block
+    background = !bgcolor * 4.3
+    padding: 5px
+    text-decoration: none
+    color: #000
+  .content
+    display: none
+    font-family = !monospace_fonts
+    padding: 10px
+
+form.formal
+  fieldset
+    position: relative
+    float: left
+    clear: left
+    width: 100%
+    padding: 0
+    border: solid 1px #ccc
+    margin: 20px 0 0 0
+    legend
+      margin-left: 10px
+      font-size: 16px
+      font-weight: bold
+    ol
+      padding: 10px 10px 0 10px
+      list-style: none
+      li
+        float: left
+        clear: left
+        width: 100%
+        padding-bottom: 10px
+        label
+          position: relative
+          float: left
+          width: 140px
+          margin-right: 1em
+          text-align: right
+          em
+            position: absolute
+            top: 0
+            left: 145px
+            display: block
+            color: #ff0000
+            font-style: normal
+            text-transform: uppercase
+          strong
+            display: block
+            color: #c00
+            font-size: 85%
+            text-transform: uppercase
+            position: absolute
+            left: 378px
+            top: 3px
+            width: 300px
+            text-align: left
+  fieldset.submit
+    border-style: none
+    float: none
+    width: auto
+    padding-left: 170px
+    padding-top: 10px
+
+#notice
+  position: relative
+  clear: both
+  font-weight: bold
+  text-align: center
+  font-size: 14px
+  height: 36px
+  background: url('../images/notice_bg.png') no-repeat
+  color: #fff
+  padding: 10px
+  
+#sidebar
+  position: relative
+  left: -170px
+  top: 20px
+  z-index: 1
+  a.closer
+    display: block
+    position: absolute
+    left: -10px
+    height: 50px
+    background: #fff
+    width: 10px
+    text-align: center
+    text-decoration: none
+    color: #800
+      
+  .panel
+    position: absolute
+    width: 150px
+    background: #800
+    color: #fff
+    padding: 10px
+    ol
+      li
+        font-size: 12px
+        font-weight: bold
+        margin-bottom: 5px
+
+.error_screen
+  text-align: center
+  padding: 100px
+
+form.login
+  font-size: 16px
+  margin: 0 auto
+  padding: 20px
+  height: 220px
+  width: 200px
+  h1
+    margin-bottom: 10px
+  ol
+    
+    li
+      margin-bottom: 10px
+      float: left
+      clear: left
+      width: 100%
+      label
+        display: block
+        background: #e6e6e6
+        padding: 5px
+        color: #444
+        position: relative
+        left: 0px
+        clear: right
+        float: left
+        width: 120px
+        margin-right: 10px
+        margin-bottom: 4px
+  .submit
+    width: 100px
+    margin: 0 auto
+    margin-top: 10px
+    clear: both
+  .field
+    padding: 5px
+    font-size: 14px
+    font-weight: bold
+    font-family = !monospace_fonts
+  .notice
+    padding: 10px
+    background: #800
+    color: #fff
+    font-size: 12px
+    margin-bottom: 10px
+
+.form_errors
+  margin-top: 10px
+  margin-left: 40px
+  width: 400px
+  background: #800
+  padding: 10px
+  color: #fff
+  font-size: 14px
+  h1
+    font-size: 16px
+  ol
+    font-size: 12px
+    margin-left: 10px
+    padding-left: 10px
+    li
+      list-style-type: disc
+      margin-bottom: 5px
+
+form.screenform
+  padding: 0 20px 0 20px
+  margin: 0 0 0 0px
+  width: 400px
+  fieldset
+    padding: 0
+    margin: 10px 0 0 0
+    ol
+      padding: 10px 10px 0 10px
+      list-style: none
+      li
+        padding: 10px
+        label
+          font-weight: bold
+          display: block
+          font-size: 14px
+          float: left
+        label.side
+          font-weight: normal
+          font-size: 12px
+          float: none
+          display: inline
+        .marker
+          float: left
+          padding: 1px 3px
+          position: relative
+          margin-left: 5px
+          font-size: 10px
+          text-transform: uppercase
+          color: #fff
+          background-color: #079
+        .marker.optional
+          background-color: #666
+        .desc
+          padding: 2px 0 0 0
+          font-family = !nice_fonts
+          clear: left
+          margin-bottom: 5px
+          font-size: 12px
+          color: #666
+        .error
+          background: #800
+          color: #fff
+        input.text
+          width: 100%
+          font-size: 14px
+          padding: 3px
+          font-weight: bold
+          font-family = !monospace_fonts
+        textarea
+          font-family = !monospace_fonts
+  fieldset.submit
+    padding: 0 0 0 20px
+
+.access_screen
+  padding: 200px 50px 50px 50px
+  min-height: 300px
+  border: solid 10px #555
+  h1
+    text-align: center
+  form
+    fieldset
+      padding-top: 20px
+      text-align: center
+      label
+        display: block
+        padding-bottom: 10px
+        font-size: 14px
+      input
+        text-size: 12px
+        text-align: center
+        font-family = !monospace_fonts
+      input.submit
+        margin-top: 10px
+        text-size: 14px
+
+h3.head
+  margin: 5px 0 5px 0
+  
+.para
+  margin: 5px 0 20px 0
+
+.publicview
+  .panel
+    background-color = !background_color
+    color: #fff
+    ul
+      position: relative
+      background-color: #666
+      height: 32px
+      li
+        float: left
+        a
+          display: block
+          padding: 5px 10px
+          color: #fff

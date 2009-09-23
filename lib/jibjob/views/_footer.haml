@@ -1,0 +1,9 @@
+#footer
+	%a{:href => "/privacy"} Privacy
+	|
+	%a{:href => "/terms"} Terms of Service
+	|
+	- if session[:user]
+		%a{:href => "/logout"} Log out
+	- else
+		%a{:href => "/login"} Log in

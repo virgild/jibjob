@@ -1,0 +1,43 @@
+.header
+  %h1 My Account
+
+.content
+  = error_messages_for current_user
+  
+  %div{:style => "margin-bottom:50px;"}
+    %h2 Update E-mail:
+    %form.screenform{:action => "/account/email", :method => "POST"}
+      %input{:type => "hidden", :name => "_method", :value => "PUT"}
+      %fieldset
+        %ol
+          %li
+            %label{:for => "user_email"} E-mail:
+            .marker Required
+            .desc Valid e-mail format only.
+            %input#user_email.text{:type => "text", :size => 30, :maxlength => 50, :name => "user[email]", :value => current_user.email}
+      %fieldset.submit
+        %input{:type => "submit", :value => "Update"}
+    
+  %h2 Change Password:
+  %form.screenform{:action => "/account/password", :method => "POST"}
+    %input{:type => "hidden", :name => "_method", :value => "PUT"}
+      %fieldset
+        %ol
+          %li
+            %label{:for => "user_password"} Password:
+            .marker Required
+            .desc Should be at least 6 characters.
+            %input#user_password.text{:type => "password", :size => 30, :name => "user[password]"}
+          %li
+            %label{:for => "user_password_confirmation"} Confirm Password:
+            .marker Required
+            .desc Password confirmation
+            %input#user_password.text{:type => "password", :size => 30, :name => "user[password_confirmation]"}
+      %fieldset.submit
+        %input{:type => "submit", :value => "Change Password"}
+      
+.clear
+:javascript
+  $(document).ready(function(){
+    $("#user_email").focus();
+  });

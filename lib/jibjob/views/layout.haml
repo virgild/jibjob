@@ -1,0 +1,20 @@
+!!! 1.1
+%html{ :xmlns => "http://www.w3.org/1999/xhtml", "xml:lang" => :en, :lang => :en }
+  %head
+    %meta{ "http-equiv" => "Content-Type", :content => "text/html; charset=utf-8" }
+    %meta{ :name => "copyright", :content => "Copyright 2009 by Roundysoft" }
+    %meta{ :description => "" }
+    %title<= @title
+    - ["reset", "main", "buttons"].each do |css|
+      %link{ :rel => "stylesheet", :type => "text/css", 
+             :href => "/css/#{css}.css", :media => "screen, projection" }
+    - ["jquery", "app"].each do |js|
+      %script{ :type => "text/javascript", :src => "/js/#{js}.js" }
+
+  %body
+    = haml_partial(:header)  
+    #container
+      - if flash[:notice]
+        #notice= flash[:notice]
+      = yield
+    = haml_partial(:footer)

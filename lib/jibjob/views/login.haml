@@ -1,0 +1,22 @@
+.content
+
+  %form#login{:action => "/login", :method => "POST", :class => "login"}
+    %h1 Login
+    - if flash[:login_notice]
+      .notice
+        = flash[:login_notice]
+        - flash[:login_notice] = nil # TODO: What's going on here?
+    %ol
+      %li
+        %label{:for => "username"} Username: 
+        %input#username.field{:type => "text", :name => "username", :value => username, :maxlength => 50}
+      %li
+        %label{:for => "password"} Password:
+        %input#password.field{:type => "password", :name => "password", :maxlength => 50}
+      %li
+        %input.submit{:type => "submit", :value => "Login"}
+  .clear
+  :javascript    
+    $(document).ready(function(){
+      $("#username").focus();
+    });

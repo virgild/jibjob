@@ -1,1 +1,7 @@
+.DS_Store
+*.db
+logs
+coverage
+tmp/*
+*.log
 log/*

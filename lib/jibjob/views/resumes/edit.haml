@@ -1,0 +1,21 @@
+- @title = h "Edit Resume - #{@resume.name}"
+.header
+  %ul.toolbar
+    %li
+      %a{:href => "/resumes/#{h @resume.id}.html"} « Preview
+    %li
+      %a.alert{:href => "/resumes/#{h @resume.id}/delete"} Delete
+  %h1 Edit Resume
+  %h2 #{h @resume.name}
+  
+.content
+  = error_messages_for @resume
+  
+  %form.screenform{:action => "/resumes/#{h @resume.id}", :method => "POST"}
+    %input{:name => "_method", :value => "PUT", :type => "hidden"}
+    = haml("resumes/_form".to_sym, :layout => false)
+    
+:javascript
+  $(document).ready(function(){
+    $("#resume_name").focus();
+  });

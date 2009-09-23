@@ -1,0 +1,24 @@
+- @title = h "Resume Preview - #{@resume.name}"
+.header
+  %ul.toolbar
+    %li
+      %a{:href => "/resumes"} « Return
+    %li
+      %a{:href => "/resumes/#{h @resume.id}/edit"} Edit
+    %li
+      %a{:href => "/resumes/#{h @resume.id}.pdf"} View as PDF
+    %li
+      %a{:href => "/resumes/#{h @resume.id}.txt"} View as Plain Text
+    %li
+      %a.alert{:href => "/resumes/#{h @resume.id}/delete"} Delete
+  %h1 Resume Preview
+  %h2 #{h @resume.name}
+  %h2 Public URL: #{resume_link(@resume)}
+  - if @resume.requires_access_code?
+    %h2 Access Code: #{@resume.access_code}
+
+- if @resume
+  = haml("resumes/_preview".to_sym, :layout => false, :locals => { :resume => @resume })
+- else
+  %div
+    Invalid resume

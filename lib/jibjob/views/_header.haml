@@ -1,0 +1,16 @@
+#header
+  .ribbon
+  %a.logo{:title => "JibJob", :href => "/"}
+    %h1 JibJob
+  %p.sub The résumé distribution center
+  %ul
+    %li
+      %a{:href => "/"} Home
+    - unless session[:user]
+      %li
+        %a{:href => "/register"} Register
+    - if session[:user]
+      %li
+        %a{:href => "/resumes"} My Resumes
+      %li
+        %a{:href => "/account"} My Account

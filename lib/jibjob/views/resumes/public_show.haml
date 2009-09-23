@@ -1,0 +1,21 @@
+.publicview
+  .panel
+    %ul
+      %li
+        %a{:href => "/view/#{@resume.slug}.pdf"} Download PDF
+      %li
+        %a{:href => "/view/#{@resume.slug}.txt"} Download Text
+    %ul
+      %li
+        %a#increaser{:href => "#"} +
+      %li
+        %a#decreaser{:href => "#"} -
+      %li
+        %a#resetter{:href => "#"} [R]
+
+= haml("resumes/_preview".to_sym, :layout => false, :locals => { :resume => @resume })
+
+:javascript
+  $(document).ready(function(){
+    resizer = new RSResizer(".preview", "#increaser", "#decreaser", "#resetter");
+  });

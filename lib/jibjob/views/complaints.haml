@@ -1,0 +1,6 @@
+- if (request.post? || request.put?) && !subject.valid?
+  .form_errors
+    %h1 There are errors in the form
+    %ol
+      - subject.errors.each do |error|
+        %li #{error.join(", ")}

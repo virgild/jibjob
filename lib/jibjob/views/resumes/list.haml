@@ -1,0 +1,26 @@
+.header
+  %ul.toolbar
+    - if current_user.can_add_resume?
+      %li
+        %a{:href => "/resumes/new"} Create New
+  %h1 My Resumes
+  
+.content
+  - if current_user.has_resume?
+    %ul.nicelist
+      - current_user.resumes.each_with_index do |resume, index|
+        %li
+          %a.name{:href => "/resumes/#{resume.id}.html"} #{h resume.name}
+          .buttons
+            %a{:href => "/resumes/#{resume.id}/edit"} Edit
+            %a{:href => "/resumes/#{resume.id}.pdf"} View as PDF
+            %a{:href => "/resumes/#{resume.id}.txt"} View as Plain Text
+          .details
+            Public URL: #{resume_link(resume)}
+            - if resume.requires_access_code?
+              %br
+              Access Code: #{h resume.access_code}
+          .clear
+  - else
+    %h3 You have no resumes.
+    
