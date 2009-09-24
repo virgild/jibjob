@@ -10,6 +10,8 @@ module JibJob
     include Form
     include Starters
     include Rack::Utils
+    include Recaptcha::ClientHelper
+    include Recaptcha::Verify
     alias :h :escape_html
   end
 end

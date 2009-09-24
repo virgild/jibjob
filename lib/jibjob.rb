@@ -46,6 +46,8 @@ require 'tempfile'
 require 'resumetools'
 require 'tmail'
 require 'pony'
+require 'net/http'
+require 'cgi'
 
 require 'dm-core'
 require 'dm-timestamps'

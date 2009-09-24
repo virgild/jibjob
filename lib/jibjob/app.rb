@@ -28,6 +28,8 @@ module JibJob
     set :cookie_domain, Proc.new { @@_app_config[environment][:cookie_domain] }
     set :cookie_secret, Proc.new { @@_app_config[environment][:cookie_secret] }
     set :noreply_email, Proc.new { @@_app_config[environment][:email][:noreply] }
+    set :recaptcha_pubkey, Proc.new { @@_app_config[environment][:recaptcha][:public_key] }
+    set :recaptcha_privkey, Proc.new { @@_app_config[environment][:recaptcha][:private_key] }
     
     db_config = @@_app_config[environment][:db]
     DataMapper.setup(:default, db_config)
@@ -152,11 +154,17 @@ module JibJob
     
     post '/register' do      
       @user = User.new(params[:user])
-      
-      if @user.save
-        send_welcome_email(@user)
-        write_welcome_cookie
-        return redirect("/welcome")
+      recaptcha_result = verify_recaptcha()
+            
+      if recaptcha_result
+        if @user.save
+          send_welcome_email(@user)
+          write_welcome_cookie
+          return redirect("/welcome")
+        end
+      else
+        @user.valid?
+        @user.errors.add :human_check, "You must verify yourself as a human"
       end
 
       show :register

@@ -1,4 +1,4 @@
-- if (request.post? || request.put?) && !subject.valid?
+- if (request.post? || request.put?) && (subject.errors.length > 0)
   .form_errors
     %h1 There are errors in the form
     %ol

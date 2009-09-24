@@ -32,6 +32,10 @@
           .desc I agree to the terms of service of this website
           %input#agreed_terms{:type => "checkbox", :name => "user[agreed_terms]", :checked => @user.agreed_terms || nil}
           %label.side{:for => "agreed_terms"} Yes, I agree.
+    %fieldset
+      %div{:style => "margin-left:18px"}
+        %h4 Verify yourself as a human:
+        = recaptcha_tags
     %fieldset.submit
       %input{:type => "submit", :value => "Submit"}
 .clear

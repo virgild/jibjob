@@ -8,6 +8,9 @@
   :cookie_secret: 
   :email:
     :noreply: no-reply@local
+  :recaptcha:
+    :public_key:
+    :private_key:
   
 :test:
   :db:
@@ -19,6 +22,9 @@
   :cookie_secret:
   :email:
     :noreply: no-reply@local
+  :recaptcha:
+    :public_key:
+    :private_key:
   
 :production:
   :db:
@@ -31,3 +37,6 @@
   :cookie_secret: 
   :email:
     :noreply: no-reply@local
+  :recaptcha:
+    :public_key:
+    :private_key:
