@@ -1,12 +1,18 @@
 - @title = h "Access Resume"
 .access_screen
-  %h1 An access code is required to view this document.
   %form{:action => "/access/#{@resume.slug}", :method => 'POST'}
     %input{:type => "hidden", :name => "format", :value => @format}
+    - if @resume.requires_access_code?
+      %fieldset
+        %h1 An access code is required to view this document.
+        %label{:for => "access_code"} Access Code:
+        %input#access_code{:type => "text", :name => "access_code"}
     %fieldset
-      %label{:for => "access_code"} Access Code:
-      %input#access_code{:type => "text", :name => "access_code"}
-      %br
+      %div{:style => "margin-top:30px;"}
+      %h1 Type the two words below:
+      %div{:style => "margin:0 auto; width: 300px"}
+        = recaptcha_tags
+    %fieldset
       %input.submit{:type => "submit", :value => "Submit"}
 
 :javascript

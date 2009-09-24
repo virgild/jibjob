@@ -154,9 +154,8 @@ module JibJob
     
     post '/register' do      
       @user = User.new(params[:user])
-      recaptcha_result = verify_recaptcha()
-            
-      if recaptcha_result
+                  
+      if verify_recaptcha()
         if @user.save
           send_welcome_email(@user)
           write_welcome_cookie
@@ -315,7 +314,7 @@ module JibJob
           status 404
       end
     end
-        
+
     # Resume access form
     get '/access/:slug.:format/?' do |slug, format|
       @resume = Resume.first(:slug => slug)
@@ -323,6 +322,11 @@ module JibJob
         status 404
         return
       end
+      
+      if has_public_access?(@resume)
+        return redirect(resume_url(@resume, format))
+      end
+      
       @format = format
       show :"resumes/access", :layout => :"layouts/public_view"
     end
@@ -335,10 +339,21 @@ module JibJob
         return
       end
       
-      format = params[:format]
+      if has_public_access?(@resume)
+        return redirect(resume_url(@resume, format))
+      end
       
-      if @resume.access_code == params[:access_code]
-        return redirect("/view/#{slug}.#{format}?c=#{@resume.access_code}")
+      if !@resume.requires_access_code? || params[:access_code] == @resume.access_code
+        if verify_recaptcha()
+          response.set_cookie("jibjob.resume.#{slug}",
+            :domain => options.cookie_domain,
+            :path => "/",
+            :value => @resume.generate_access_cookie(request.ip),
+            :expires => Time.now + (60 * 5),
+            :secure => false,
+            :httponly => true)
+          return redirect(resume_url(@resume, params[:format]))
+        end
       end
       
       show :"resumes/access", :layout => :"layouts/public_view"

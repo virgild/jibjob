@@ -95,6 +95,14 @@ module JibJob
     def requires_access_code?
       !self.access_code.blank?
     end
+    
+    def valid_access_cookie?(value, ip_address)
+      self.generate_access_cookie(ip_address) == value
+    end
+    
+    def generate_access_cookie(ip_address)
+      OpenSSL::HMAC.hexdigest(OpenSSL::Digest::SHA1.new, self.access_code, ip_address)
+    end
         
     def self.name_exists?(name, user=nil)
       if user
