@@ -13,6 +13,7 @@ module JibJob
     property :updated_at, DateTime
         
     belongs_to :user, :model => "JibJob::User", :child_key => [:user_id]
+    has n, :messages, :model => "JibJob::Message"
     
     validates_present :user
     validates_present :name, :message => "A name is required"

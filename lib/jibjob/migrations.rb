@@ -92,5 +92,28 @@ module JibJob
       end
     end
     
+    migration 4, :add_messages, :verbose => true do
+      up do
+        execute(<<-SQL)
+          CREATE TABLE IF NOT EXISTS `messages` (
+            `id` SERIAL,
+            `resume_id` VARCHAR(50) NOT NULL,
+            `subject` VARCHAR(128),
+            `body` TEXT,
+            `from` VARCHAR(512),
+            `is_read` TINYINT,
+            `created_at` DATETIME,
+            KEY `messages_resume_id_index` (`resume_id`)
+          )
+          ENGINE = InnoDB
+          DEFAULT CHARSET = utf8;
+        SQL
+      end
+      
+      down do
+        execute("DROP TABLE `messages`")
+      end
+    end
+    
   end #module Migrations
 end #module JibJob

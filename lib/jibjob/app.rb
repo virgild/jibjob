@@ -3,6 +3,7 @@ dir = Pathname(__FILE__).dirname.expand_path
 require dir / 'core_ext' / 'object'
 require dir / 'user'
 require dir / 'resume'
+require dir / 'message'
 require dir / 'helpers'
 
 
