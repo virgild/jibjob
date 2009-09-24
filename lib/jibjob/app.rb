@@ -65,14 +65,14 @@ module JibJob
 
     # Racks
     configure :development, :production do
-      use Rack::Session::Cookie, :key => "jibjob.session",
-                                 :domain => self.cookie_domain,
-                                 :path => "/",
-                                 :expire_after => 3600,
-                                 :secret => self.cookie_secret
+      use Rack::Session::Pool, :key => "jibjob.session_id",
+                               :domain => self.cookie_domain,
+                               :path => "/",
+                               :expire_after => 3600,
+                               :secret => self.cookie_secret
       use Rack::Flash
     end
-
+    
     # Before filter
     before do
     end
