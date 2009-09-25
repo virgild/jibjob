@@ -35,7 +35,7 @@
     %fieldset
       %div{:style => "margin-left:18px"}
         %h4 Type the two words below:
-        = recaptcha_tags
+        = recaptcha_tags :display => { :theme => "clean" }
     %fieldset.submit
       %input{:type => "submit", :value => "Submit"}
 .clear

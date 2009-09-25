@@ -163,7 +163,7 @@ module JibJob
         end
       else
         @user.valid?
-        @user.errors.add :human_check, "You must verify yourself as a human"
+        @user.errors.add :human_check, "You must type the two words below correctly"
       end
 
       show :register

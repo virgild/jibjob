@@ -9,9 +9,9 @@
         %input#access_code{:type => "text", :name => "access_code"}
     %fieldset
       %div{:style => "margin-top:30px;"}
-      %h1 Type the two words below:
-      %div{:style => "margin:0 auto; width: 300px"}
-        = recaptcha_tags
+      %h3 Type the two words below:
+      %div{:style => "margin:0 auto; width: 450px"}
+        = recaptcha_tags :display => { :theme => "clean" }
     %fieldset
       %input.submit{:type => "submit", :value => "Submit"}
 
