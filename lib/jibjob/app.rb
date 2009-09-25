@@ -157,7 +157,7 @@ module JibJob
                   
       if verify_recaptcha()
         if @user.save
-          send_welcome_email(@user)
+          send_welcome_email(@user) if (self.class.environment == :production)
           write_welcome_cookie
           return redirect("/welcome")
         end
@@ -349,7 +349,7 @@ module JibJob
             :domain => options.cookie_domain,
             :path => "/",
             :value => @resume.generate_access_cookie(request.ip),
-            :expires => Time.now + (60 * 5),
+            :expires => Time.now + 3600,
             :secure => false,
             :httponly => true)
           return redirect(resume_url(@resume, params[:format]))

@@ -62,14 +62,14 @@ module Recaptcha
         end
         answer, error = recaptcha.body.split.map { |s| s.chomp }
         unless answer == 'true'
-          session[:recaptcha_error] = error
+          #session[:recaptcha_error] = error
           return false
         else
-          session[:recaptcha_error] = nil
+          #session[:recaptcha_error] = nil
           return true
         end
       rescue Timeout::Error 
-        session[:recaptcha_error] = "recaptcha-not-reachable"
+        #session[:recaptcha_error] = "recaptcha-not-reachable"
         return false
       rescue Exception => e
         raise RecaptchaError, e.message, e.backtrace
