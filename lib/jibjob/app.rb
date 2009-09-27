@@ -403,7 +403,7 @@ module JibJob
       msg.from = params[:message][:from]
       msg.subject = params[:message][:subject]
       msg.body = params[:message][:body]
-
+      
       if msg.save
         "OK".to_json
       else

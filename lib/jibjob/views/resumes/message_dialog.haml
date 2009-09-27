@@ -5,14 +5,24 @@
     %fieldset
       %ul
         %li
-          From
-          %input{:type => "text", :name => "message[from]", :id => "message_from"}
+          %label{:for => "message_from"} Your name:
+          .marker Required
+          %input.text{:type => "text", :name => "message[from]", :id => "message_from", :size => 30, :maxlength => 50}
         %li
-          Subject
-          %input{:type => "text", :name => "message[subject]", :id => "message_subject"}
+          %label{:for => "message_email"} Your e-mail address:
+          .marker Required
+          %input.text{:type => "text", :name => "message[email]", :id => "message_email", :size => 30, :maxlength => 50}
         %li
-          Message
-          %textarea{:name => "message[body]", :id => "message_body"}
+          %label{:for => "message_subject"} Subject:
+          .marker Required
+          %input.text{:type => "text", :name => "message[subject]", :id => "message_subject", :size => 30, :maxlength => 50}
     %fieldset
-      %input{:type => "submit"}
+      %ul
+        %li
+          %label{:for => "message_body"} Message:
+          .marker Required
+          %textarea{:name => "message[body]", :id => "message_body", :rows => 6, :cols => 60}
+    %fieldset.submit
+      %input{:type => "submit", :value => "Send Message"}
       %img#msgform_throbber{:src => "/images/throbber.gif"}
+    .clear
