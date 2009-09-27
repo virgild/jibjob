@@ -12,6 +12,8 @@ module JibJob
     belongs_to :resume, :model => "JibJob::Resume"
     
     validates_present :from
+    validates_present :subject
+    validates_present :body
     
     def is_read?
       self.is_read || false

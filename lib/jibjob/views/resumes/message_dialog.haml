@@ -1,0 +1,18 @@
+.message_dialog
+  %h1 Send message to #{@resume.data.full_name}:
+  .error_container
+  %form#message_form{:action => "/messages/#{@resume.slug}", :method => "POST"}
+    %fieldset
+      %ul
+        %li
+          From
+          %input{:type => "text", :name => "message[from]", :id => "message_from"}
+        %li
+          Subject
+          %input{:type => "text", :name => "message[subject]", :id => "message_subject"}
+        %li
+          Message
+          %textarea{:name => "message[body]", :id => "message_body"}
+    %fieldset
+      %input{:type => "submit"}
+      %img#msgform_throbber{:src => "/images/throbber.gif"}

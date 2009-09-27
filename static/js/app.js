@@ -50,3 +50,90 @@ RSResizer.prototype.setLevel = function(level) {
   this.current_level = level;
 };
 /* End Resizer */
+
+/* Messenger */
+function Messenger(options) {
+  var messenger = this;
+  this.container = options["container"];
+  this.opener = options["opener"];
+  this.slug = options["slug"];
+  this.opened = false;
+  this.form = options["form"];
+  
+  $(this.opener).click(function(event) {
+    if (messenger.opened) {
+      messenger.closeMessageDialog();
+    } else {
+      messenger.openMessageDialog();
+    }
+    return false;
+  });
+  
+  $(this.form).submit(function(event){
+    messenger.submitForm();
+    return false;
+  });
+  
+  $(this.form).ajaxStart(function(event){
+    messenger.enableForm(false);
+    messenger.showFormThrobber();
+  });
+  
+  $(this.form).ajaxComplete(function(event){
+    messenger.enableForm(true);
+    messenger.hideFormThrobber();
+  });
+}
+
+Messenger.prototype.showFormThrobber = function() {
+  $(this.container + " #msgform_throbber").show();
+};
+
+Messenger.prototype.hideFormThrobber = function() {
+  $(this.container + " #msgform_throbber").hide();
+};
+
+Messenger.prototype.enableForm = function(enabled) {
+  $(this.form + " input, textarea").attr("disabled", !enabled);
+};
+
+Messenger.prototype.openMessageDialog = function() {
+  $(this.container + " .message_dialog").slideDown();
+  $(this.opener).text("Close it");
+  this.opened = true;
+};
+
+Messenger.prototype.closeMessageDialog = function() {
+  $(this.container + " .message_dialog").slideUp();
+  $(this.opener).text("Send message");
+  this.opened = false;
+};
+
+Messenger.prototype.clearErrorUI = function() {
+  $(this.container + " .error_container").empty();
+};
+
+Messenger.prototype.submitForm = function() {
+  this.clearErrorUI();
+  var msg_data = $(this.form).serializeArray();
+  var messenger = this;
+  $.ajax({
+    url: "/messages/" + this.slug,
+    type: "POST",
+    data: msg_data,
+    dataType: "json",
+    error: function(xhr, textStatus) {
+      var error_ui = $(xhr.responseText);
+      $(".error_container").append(error_ui);
+    },
+    success: function(data, textStatus) {
+      window.alert("Message sent.");
+      messenger.clearForm();
+    },
+  });
+};
+
+Messenger.prototype.clearForm = function() {
+  $(this.form + " input:text, textarea").val("");
+};
+/* End Messenger */

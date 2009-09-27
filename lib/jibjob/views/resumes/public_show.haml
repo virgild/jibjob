@@ -11,10 +11,20 @@
       %a#increaser{:href => "#"}
     %li
       %a#decreaser{:href => "#"}
+  %a#open_message{:href => "#"} Send message
+
+#message_dialog_container
+  = haml :"resumes/message_dialog", :layout => false
       
 = haml("resumes/_preview".to_sym, :layout => false, :locals => { :resume => @resume })
 
 :javascript
   $(document).ready(function(){
     resizer = new RSResizer(".preview", "#increaser", "#decreaser", "#resetter");
+    messenger = new Messenger({
+      "container": "#message_dialog_container",
+      "opener": "#open_message",
+      "slug": "#{@resume.slug}",
+      "form": "#message_form"
+    });
   });

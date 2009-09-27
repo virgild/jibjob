@@ -385,6 +385,37 @@ module JibJob
       end
       show :"account/edit"
     end
+    
+    # Message dialog
+    get '/message/:slug' do |slug|
+      @resume = Resume.first(:slug => slug)
+      if @resume.nil?
+        status 404
+        return
+      end
+      show :"resumes/message_dialog", :layout => false
+    end
+    
+    post '/messages/:slug' do |slug|
+      @resume = Resume.first(:slug => slug)
+      if @resume.nil?
+        status 404
+        return "NOT FOUND"
+      end
+      
+      msg = @resume.messages.new
+      msg.from = params[:message][:from]
+      msg.subject = params[:message][:subject]
+      msg.body = params[:message][:body]
+
+      if msg.save
+        "OK".to_json
+      else
+        status 409
+        content_type "text/html"
+        haml :"resumes/message_errors", :layout => false, :locals => { :message => msg }
+      end
+    end
 
   end #class App < Sinatra::Base
 end #module JibJob
