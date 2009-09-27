@@ -297,6 +297,8 @@ module JibJob
         return redirect("/access/#{slug}.#{format}")
       end
       
+      write_public_view_cookie(@resume)
+      
       case format
         when 'pdf'
           content_type "application/pdf"
@@ -345,13 +347,7 @@ module JibJob
       
       if !@resume.requires_access_code? || params[:access_code] == @resume.access_code
         if verify_recaptcha()
-          response.set_cookie("jibjob.resume.#{slug}",
-            :domain => options.cookie_domain,
-            :path => "/",
-            :value => @resume.generate_access_cookie(request.ip),
-            :expires => Time.now + 3600,
-            :secure => false,
-            :httponly => true)
+          write_public_view_cookie @resume
           return redirect(resume_url(@resume, params[:format]))
         end
       end

@@ -62,6 +62,16 @@ module JibJob
           :httponly => true)
       end
       
+      def write_public_view_cookie(resume)
+        response.set_cookie("jibjob.resume.#{resume.slug}",
+          :domain => options.cookie_domain,
+          :path => "/",
+          :value => resume.generate_access_cookie(request.ip),
+          :expires => Time.now + 3600,
+          :secure => false,
+          :httponly => true)
+      end
+      
       def error_messages_for(subject)
         haml(:complaints, :layout => false, :locals => { :subject => subject })
       end
