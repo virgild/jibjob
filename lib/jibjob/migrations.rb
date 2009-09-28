@@ -115,5 +115,17 @@ module JibJob
       end
     end
     
+    migration 5, :add_email_column_to_messages, :verbose => true do
+      up do
+        execute(<<-SQL)
+          ALTER TABLE `messages` ADD `email` VARCHAR(200) NOT NULL
+        SQL
+      end
+      
+      down do
+        execute("ALTER TABLE `messages` DROP `email`")
+      end
+    end
+    
   end #module Migrations
 end #module JibJob

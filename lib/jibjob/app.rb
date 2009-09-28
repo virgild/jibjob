@@ -402,6 +402,7 @@ module JibJob
       msg = @resume.messages.new
       msg.from = params[:message][:from]
       msg.subject = params[:message][:subject]
+      msg.email = params[:message][:email]
       msg.body = params[:message][:body]
       
       if msg.save
