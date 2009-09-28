@@ -12,9 +12,12 @@
       %th.from From
       %th.subject Subject
       %th.date Date
+      %th
     - @messages.each do |message|
       %tr{:class => (message.is_read? ? '' : 'unread')}
         %td #{h message.from}
         %td
           %a{:href => "/resumes/#{@resume.id}/messages/#{message.id}"} #{h message.subject}
-        %td #{h message.created_at.to_s}
+        %td #{h message.created_at.strftime("%Y-%m-%d")}
+        %td
+          %a{:href => ""} Delete

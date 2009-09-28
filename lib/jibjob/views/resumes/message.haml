@@ -10,10 +10,10 @@
   .message_view
     %ul
       %li
-        From: #{h @message.from} &lt;#{@message.email}&gt;
+        From: #{h Sanitize.clean(@message.from)} &lt;#{Sanitize.clean(@message.email)}&gt;
       %li
-        Subject: #{h @message.subject}
+        Subject: #{h Sanitize.clean(@message.subject)}
       %li
-        Date: #{h @message.created_at}
+        Date: #{h @message.created_at.strftime("%r %Y-%m-%d")}
     %p.body
-      #{h @message.body}
+      #{h Sanitize.clean(@message.body)}

@@ -16,7 +16,8 @@ gems = [
   ['dm-is-viewable', '>= 0.10.0'],
   ['dm-validations', '>= 0.10.0'],
   ['tmail', '>= 1.2.3.1'],
-  ['pony', '>= 0.3']
+  ['pony', '>= 0.3'],
+  ['sanitize', '>= 1.0.8']
 ]
 
 gems.each do |name, version|
@@ -48,6 +49,7 @@ require 'tmail'
 require 'pony'
 require 'net/http'
 require 'cgi'
+require 'sanitize'
 
 require 'dm-core'
 require 'dm-timestamps'

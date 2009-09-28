@@ -411,6 +411,7 @@ module JibJob
       show :"resumes/message_dialog", :layout => false
     end
     
+    # Write message
     post '/messages/:slug' do |slug|
       @resume = Resume.first(:slug => slug)
       if @resume.nil?
@@ -419,10 +420,10 @@ module JibJob
       end
       
       msg = @resume.messages.new
-      msg.from = params[:message][:from]
-      msg.subject = params[:message][:subject]
-      msg.email = params[:message][:email]
-      msg.body = params[:message][:body]
+      msg.from = Sanitize.clean(params[:message][:from])
+      msg.subject = Sanitize.clean(params[:message][:subject])
+      msg.email = Sanitize.clean(params[:message][:email])
+      msg.body = Sanitize.clean(params[:message][:body])
       
       if msg.save
         "OK".to_json
