@@ -481,3 +481,30 @@ a#open_message
     fieldset.submit
       text-align: right
       width: 100%
+
+table.msglist
+  width: 100%
+  tr
+    td
+      padding: 5px
+    th
+      padding: 5px
+      font-weight: bold
+      font-size: 14px
+      border-bottom: 1px solid #ccc
+    th.from
+      width: 200px
+    th.subject
+      width: 400px
+    th.date
+      width: 200px
+  tr.unread
+    td
+      font-weight: bold
+
+.message_view
+  p.body
+    padding-top: 10px
+    border-top: solid 1px #ccc
+    margin-top: 10px
+    font-family = !monospace_fonts

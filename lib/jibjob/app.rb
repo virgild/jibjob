@@ -281,6 +281,25 @@ module JibJob
       @resume.destroy
       redirect "/resumes"
     end
+    
+    # Resumes - messages
+    get '/resumes/:id/messages' do
+      require_user
+      @resume = current_user.resumes.get(params[:id])
+      @messages = @resume.messages(:order => [:created_at.desc])
+      show :"resumes/messages"
+    end
+    
+    # Resume - message
+    get '/resumes/:resume_id/messages/:message_id' do |resume_id, message_id|
+      require_user
+      @resume = current_user.resumes.get(resume_id)
+      @message = @resume.messages.get(message_id)
+      
+      @message.mark_as_read!
+      
+      show :"resumes/message"
+    end
 
     # GET - resume public view
     get %r{/view/([\w-]+)(\.(\w+))?} do |slug, ext, format|

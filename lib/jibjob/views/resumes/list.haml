@@ -15,6 +15,7 @@
             %a{:href => "/resumes/#{resume.id}/edit"} Edit
             %a{:href => "/resumes/#{resume.id}.pdf"} View as PDF
             %a{:href => "/resumes/#{resume.id}.txt"} View as Plain Text
+            %a{:href => "/resumes/#{resume.id}/messages"} Messages #{unread_messages_count(resume)}
           .details
             Public URL: #{resume_link(resume)}
             - if resume.requires_access_code?

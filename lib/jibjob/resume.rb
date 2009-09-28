@@ -103,6 +103,18 @@ module JibJob
     def generate_access_cookie(ip_address)
       OpenSSL::HMAC.hexdigest(OpenSSL::Digest::SHA1.new, self.access_code, ip_address)
     end
+    
+    def has_unread_messages?
+      self.unread_messages_count > 0
+    end
+    
+    def unread_messages_count
+      self.unread_messages.count
+    end
+    
+    def unread_messages
+      self.messages.all(:is_read => false)
+    end
         
     def self.name_exists?(name, user=nil)
       if user

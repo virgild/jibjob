@@ -1,0 +1,20 @@
+- @title = h "Resume Messages - #{@resume.name}"
+.header
+  %ul.toolbar
+    %li
+      %a{:href => "/resumes/#{h @resume.id}.html"} « Preview
+  %h1 Messages
+  %h2 #{h @resume.name}
+  
+.content
+  %table.msglist
+    %tr
+      %th.from From
+      %th.subject Subject
+      %th.date Date
+    - @messages.each do |message|
+      %tr{:class => (message.is_read? ? '' : 'unread')}
+        %td #{h message.from}
+        %td
+          %a{:href => "/resumes/#{@resume.id}/messages/#{message.id}"} #{h message.subject}
+        %td #{h message.created_at.to_s}

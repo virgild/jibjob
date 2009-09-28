@@ -127,5 +127,13 @@ module JibJob
       end
     end
     
+    migration 6, :messages_set_is_read_default, :verbose => true do
+      up do
+        execute(<<-SQL)
+          ALTER TABLE `messages` CHANGE `is_read` `is_read` TINYINT(4) NOT NULL DEFAULT '0'
+        SQL
+      end
+    end
+    
   end #module Migrations
 end #module JibJob
