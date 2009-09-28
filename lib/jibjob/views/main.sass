@@ -88,9 +88,12 @@ div.ribbon
     li
       float: left
       a
+        float: left
         +shadowed-text
         display: block
         padding: 10px
+        padding-right: 0px
+        padding-left: 20px
         color: #fff
         text-decoration: none
         font-size: 14px
@@ -98,14 +101,17 @@ div.ribbon
         font-weight: bold
         &:hover
           text-decoration: underline
+          //background-color: #333
           color: #ddd
         &:active
           outline: none
         &:focus
-          background-color: #333
+          //background-color: #333
           outline: none
-  .unread_count
-    padding-top: 4px
+      .unread_count
+        float: left
+        margin-top: 8px
+        background: #D33
   
 #container
   +acts_like_container

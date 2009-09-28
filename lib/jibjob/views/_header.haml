@@ -11,6 +11,7 @@
         %a{:href => "/register"} Register
     - if session[:user]
       %li
-        %a{:href => "/resumes"} My Resumes #{unread_messages_count(current_user)}
+        %a{:href => "/resumes"} My Resumes
+        #{unread_messages_count(current_user)}
       %li
         %a{:href => "/account"} My Account
