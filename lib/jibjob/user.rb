@@ -17,18 +17,26 @@ module JibJob
     
     validates_present :username, :message => "A username is required"
     validates_present :email, :message => "An e-mail is required"
-    validates_present :password, :message => "A password is required", :if => Proc.new { |u| u.crypted_password.blank? }
-    validates_length :username, :min => 5, :max => 30, :unless => Proc.new { |u| u.username.blank? },
+    validates_present :password, :message => "A password is required", 
+      :if => Proc.new { |u| u.crypted_password.blank? }
+    validates_length :username, :min => 5, :max => 30, 
+      :unless => Proc.new { |u| u.username.blank? }, 
       :message => "Username must be at least 5 characters"
-    validates_is_unique :username, :message => "This username is already used", :unless => Proc.new { |u| u.username.blank? }
-    validates_is_unique :email, :message => "This e-mail is already used", :unless => Proc.new { |u| u.email.blank? }
+    validates_is_unique :username, :message => "This username is already used", 
+      :unless => Proc.new { |u| u.username.blank? }
+    validates_is_unique :email, :message => "This e-mail is already used", 
+      :unless => Proc.new { |u| u.email.blank? }
     validates_length :password, :min => 6, :unless => Proc.new { |u| u.password.blank? }, 
       :message => "The password must be at least 6 characters"
-    validates_is_accepted :agreed_terms, :accept => "on", :allow_nil => false, :message => "You must accept the terms of service"
-    validates_is_confirmed :password, :message => "The passwords must match", :unless => Proc.new { |u| u.password.blank? }
-    validates_format :username, :with => /^[a-zA-Z][a-zA-Z_0-9]+$/, :unless => Proc.new { |u| u.username.blank? },
+    validates_is_accepted :agreed_terms, :accept => "on", :allow_nil => false, 
+      :message => "You must accept the terms of service"
+    validates_is_confirmed :password, :message => "The passwords must match", 
+      :unless => Proc.new { |u| u.password.blank? }
+    validates_format :username, :with => /^[a-zA-Z][a-zA-Z_0-9]+$/, 
+      :unless => Proc.new { |u| u.username.blank? }, 
       :message => "The username is invalid"
-    validates_format :email, :as => :email_address, :unless => Proc.new { |u| u.email.blank? }
+    validates_format :email, :as => :email_address, 
+      :unless => Proc.new { |u| u.email.blank? }
     
     before :save, :normalize_fields
     before :destroy, :destroy_resumes    
@@ -74,6 +82,14 @@ module JibJob
     
     def self.email_exists?(email)
       !self.first(:email => email).nil?
+    end
+    
+    def unread_messages_count
+      self.resumes.messages(:is_read => false).count
+    end
+    
+    def has_unread_messages?
+      self.unread_messages_count > 0
     end
     
     private

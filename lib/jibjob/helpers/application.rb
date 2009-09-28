@@ -82,9 +82,9 @@ module JibJob
           :subject => "Welcome to JibJob", :body => body, :via => :sendmail)
       end
       
-      def unread_messages_count(resume)
-        if resume.has_unread_messages?
-          %{<span class="unread_count">#{resume.unread_messages_count}</span>}
+      def unread_messages_count(subject)
+        if subject.has_unread_messages?
+          %{<span class="unread_count">#{subject.unread_messages_count}</span>}
         else
           ''
         end
