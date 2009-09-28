@@ -67,7 +67,7 @@ module JibJob
           :domain => options.cookie_domain,
           :path => "/",
           :value => resume.generate_access_cookie(request.ip),
-          :expires => Time.now + 3600,
+          :expires => Time.now + 3600 * 24,
           :secure => false,
           :httponly => true)
       end
