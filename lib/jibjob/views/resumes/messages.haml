@@ -14,10 +14,16 @@
       %th.date Date
       %th
     - @messages.each do |message|
-      %tr{:class => (message.is_read? ? '' : 'unread')}
-        %td #{h message.from}
+      %tr{:class => (message.is_read? ? '' : 'unread'), :id => "msg_#{message.id}"}
+        %td #{h Sanitize.clean(message.from)}
         %td
-          %a{:href => "/resumes/#{@resume.id}/messages/#{message.id}"} #{h message.subject}
+          %a{:href => "/resumes/#{@resume.id}/messages/#{message.id}"} #{h Sanitize.clean(message.subject)}
         %td #{h message.created_at.strftime("%Y-%m-%d")}
         %td
-          %a{:href => ""} Delete
+          %a.delete_msg_btn{:href => "#", :id => "delete_msg_btn_#{message.id}", :rel => "#{@resume.id};#{message.id}"} Delete
+
+:javascript
+  $(document).ready(function(){
+    message_destroyer = new MessageDestroyer();
+    message_destroyer.activate();
+  });

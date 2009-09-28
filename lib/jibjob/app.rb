@@ -300,6 +300,20 @@ module JibJob
       
       show :"resumes/message"
     end
+    
+    # Resume - delete message
+    delete '/resumes/:resume_id/messages/:message_id' do |resume_id, message_id|
+      require_user
+      @resume = current_user.resumes.get(resume_id)
+      @message = @resume.messages.get(message_id)
+      
+      if @message.destroy
+        "OK"
+      else
+        status 409
+        "ERROR"
+      end      
+    end
 
     # GET - resume public view
     get %r{/view/([\w-]+)(\.(\w+))?} do |slug, ext, format|

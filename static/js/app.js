@@ -137,3 +137,37 @@ Messenger.prototype.clearForm = function() {
   $(this.form + " input:text, textarea").val("");
 };
 /* End Messenger */
+
+
+/* MessageDestroyer */
+function MessageDestroyer(options) {
+  
+}
+
+MessageDestroyer.prototype.activate = function() {
+  var destroyer = this;
+  $(".delete_msg_btn").each(function(i, button){
+    $(button).click(function(event){
+      props = $(button).attr("rel").split(";");
+      resume_id = props[0];
+      msg_id = props[1];
+      destroyer.destroy(resume_id, msg_id);
+      return false;
+    });
+  });
+};
+
+MessageDestroyer.prototype.destroy = function(resume_id, msg_id) {
+  $.ajax({
+    url: "/resumes/" + resume_id + "/messages/" + msg_id,
+    type: "POST",
+    data: {
+      _method: "DELETE"
+    },
+    error: function(xhr, textStatus) { window.alert("Delete message unexpected error"); },
+    success: function(data, textStatus) {
+      $("tr#msg_" + msg_id).slideUp();
+    }
+  });
+};
+/* End MessageDestroyer */
