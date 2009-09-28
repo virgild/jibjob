@@ -13,14 +13,19 @@
       %th.subject Subject
       %th.date Date
       %th
-    - @messages.each do |message|
-      %tr{:class => (message.is_read? ? '' : 'unread'), :id => "msg_#{message.id}"}
-        %td #{h Sanitize.clean(message.from)}
-        %td
-          %a{:href => "/resumes/#{@resume.id}/messages/#{message.id}"} #{h Sanitize.clean(message.subject)}
-        %td #{h message.created_at.strftime("%Y-%m-%d")}
-        %td
-          %a.delete_msg_btn{:href => "#", :id => "delete_msg_btn_#{message.id}", :rel => "#{@resume.id};#{message.id}"} Delete
+    - if @messages.length > 0
+      - @messages.each do |message|
+        %tr{:class => (message.is_read? ? '' : 'unread'), :id => "msg_#{message.id}"}
+          %td #{h Sanitize.clean(message.from)}
+          %td
+            %a{:href => "/resumes/#{@resume.id}/messages/#{message.id}"} #{h Sanitize.clean(message.subject)}
+          %td #{h message.created_at.strftime("%Y-%m-%d")}
+          %td
+            %a.delete_msg_btn{:href => "#", :id => "delete_msg_btn_#{message.id}", :rel => "#{@resume.id};#{message.id}"} Delete
+    - else
+      %tr
+        %td.no_msgs{:colspan => "4"}
+          No messages
 
 :javascript
   $(document).ready(function(){
