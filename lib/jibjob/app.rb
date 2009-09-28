@@ -68,7 +68,7 @@ module JibJob
       use Rack::Session::Cookie, :key => "jibjob.session",
                                  :domain => self.cookie_domain,
                                  :path => "/",
-                                 :expire_after => 3600,
+                                 :expire_after => 3600 * 8,
                                  :secret => self.cookie_secret
       use Rack::Flash
     end
