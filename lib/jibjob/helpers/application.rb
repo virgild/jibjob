@@ -84,7 +84,7 @@ module JibJob
       
       def unread_messages_count(resume)
         if resume.has_unread_messages?
-          "(#{resume.unread_messages_count})"
+          %{<span class="unread_count">#{resume.unread_messages_count}</span>}
         else
           ''
         end
