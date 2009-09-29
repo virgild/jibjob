@@ -8,10 +8,11 @@
         %img{:src => "/images/plain_text.png", :width => "48", :height => "48", :title => "Download as Plain Text"}
   %ul.sizer
     %li
-      %a#increaser{:href => "#"}
+      %a#increaser{:href => "#", :title => "Make text bigger"}
     %li
-      %a#decreaser{:href => "#"}
-  %a#open_message{:href => "#"} Send message
+      %a#decreaser{:href => "#", :title => "Make text smaller"}
+    %li
+      %a#open_message{:href => "#", :title => "Send message"}
 
 #message_dialog_container
   = haml :"resumes/message_dialog", :layout => false

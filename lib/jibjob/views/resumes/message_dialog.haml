@@ -1,6 +1,9 @@
 .message_dialog
-  %h1 Send message to #{@resume.data.full_name}:
+  %h1.header Send message to #{@resume.data.full_name}:
+  %a.closer{:href => "#", :title => "Close message panel"}
+  .clear
   .error_container
+  
   %form#message_form{:action => "/messages/#{@resume.slug}", :method => "POST"}
     %fieldset
       %ul

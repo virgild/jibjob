@@ -60,6 +60,7 @@ function Messenger(options) {
   this.slug = options["slug"];
   this.opened = false;
   this.form = options["form"];
+  this.closer = $(this.container + " .closer");
   
   $(this.opener).click(function(event) {
     if (messenger.opened) {
@@ -67,6 +68,11 @@ function Messenger(options) {
     } else {
       messenger.openMessageDialog();
     }
+    return false;
+  });
+  
+  $(this.closer).click(function(event) {
+    messenger.closeMessageDialog();
     return false;
   });
   
@@ -100,13 +106,11 @@ Messenger.prototype.enableForm = function(enabled) {
 
 Messenger.prototype.openMessageDialog = function() {
   $(this.container + " .message_dialog").slideDown();
-  $(this.opener).text("Close it");
   this.opened = true;
 };
 
 Messenger.prototype.closeMessageDialog = function() {
   $(this.container + " .message_dialog").slideUp();
-  $(this.opener).text("Send message");
   this.opened = false;
 };
 
