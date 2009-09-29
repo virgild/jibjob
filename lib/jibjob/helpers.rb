@@ -7,7 +7,6 @@ module JibJob
     include Resume
     include Debug
     include Rendering
-    include Form
     include Starters
     include Rack::Utils
     include Recaptcha::ClientHelper
