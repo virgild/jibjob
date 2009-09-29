@@ -56,6 +56,7 @@ function Messenger(options) {
   var messenger = this;
   this.container = options["container"];
   this.opener = options["opener"];
+  this.resume_id = options["resume_id"];
   this.slug = options["slug"];
   this.opened = false;
   this.form = options["form"];
@@ -118,7 +119,7 @@ Messenger.prototype.submitForm = function() {
   var msg_data = $(this.form).serializeArray();
   var messenger = this;
   $.ajax({
-    url: "/messages/" + this.slug,
+    url: "/resumes/" + this.resume_id + "/messages",
     type: "POST",
     data: msg_data,
     dataType: "json",

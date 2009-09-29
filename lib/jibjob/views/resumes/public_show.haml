@@ -22,9 +22,10 @@
   $(document).ready(function(){
     resizer = new RSResizer(".preview", "#increaser", "#decreaser", "#resetter");
     messenger = new Messenger({
-      "container": "#message_dialog_container",
-      "opener": "#open_message",
-      "slug": "#{@resume.slug}",
-      "form": "#message_form"
+      container: "#message_dialog_container",
+      opener: "#open_message",
+      slug: "#{@resume.slug}",
+      resume_id: "#{@resume.id}",
+      form: "#message_form"
     });
   });

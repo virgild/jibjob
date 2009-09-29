@@ -282,7 +282,7 @@ module JibJob
       redirect "/resumes"
     end
     
-    # Resumes - messages
+    # Resumes - list messages
     get '/resumes/:id/messages' do
       require_user
       @resume = current_user.resumes.get(params[:id])
@@ -290,7 +290,30 @@ module JibJob
       show :"resumes/messages"
     end
     
-    # Resume - message
+    # Resume - write message
+    post '/resumes/:id/messages' do |resume_id|
+      @resume = Resume.get(resume_id)
+      if @resume.nil?
+        status 404
+        return "NOT FOUND"
+      end
+      
+      msg = @resume.messages.new
+      msg.from = Sanitize.clean(params[:message][:from])
+      msg.subject = Sanitize.clean(params[:message][:subject])
+      msg.email = Sanitize.clean(params[:message][:email])
+      msg.body = Sanitize.clean(params[:message][:body])
+      
+      if msg.save
+        "OK".to_json
+      else
+        status 409
+        content_type "text/html"
+        haml :"resumes/message_errors", :layout => false, :locals => { :message => msg }
+      end
+    end
+    
+    # Resume - get message
     get '/resumes/:resume_id/messages/:message_id' do |resume_id, message_id|
       require_user
       @resume = current_user.resumes.get(resume_id)
@@ -423,29 +446,6 @@ module JibJob
         return
       end
       show :"resumes/message_dialog", :layout => false
-    end
-    
-    # Write message
-    post '/messages/:slug' do |slug|
-      @resume = Resume.first(:slug => slug)
-      if @resume.nil?
-        status 404
-        return "NOT FOUND"
-      end
-      
-      msg = @resume.messages.new
-      msg.from = Sanitize.clean(params[:message][:from])
-      msg.subject = Sanitize.clean(params[:message][:subject])
-      msg.email = Sanitize.clean(params[:message][:email])
-      msg.body = Sanitize.clean(params[:message][:body])
-      
-      if msg.save
-        "OK".to_json
-      else
-        status 409
-        content_type "text/html"
-        haml :"resumes/message_errors", :layout => false, :locals => { :message => msg }
-      end
     end
 
   end #class App < Sinatra::Base
