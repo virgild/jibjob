@@ -158,16 +158,19 @@ MessageDestroyer.prototype.activate = function() {
 };
 
 MessageDestroyer.prototype.destroy = function(resume_id, msg_id) {
-  $.ajax({
-    url: "/resumes/" + resume_id + "/messages/" + msg_id,
-    type: "POST",
-    data: {
-      _method: "DELETE"
-    },
-    error: function(xhr, textStatus) { window.alert("Delete message unexpected error"); },
-    success: function(data, textStatus) {
-      $("tr#msg_" + msg_id).slideUp();
-    }
-  });
+  var answer = confirm("Are you sure you want to delete this message?");
+  if (answer) {
+    $.ajax({
+      url: "/resumes/" + resume_id + "/messages/" + msg_id,
+      type: "POST",
+      data: {
+        _method: "DELETE"
+      },
+      error: function(xhr, textStatus) { window.alert("Delete message unexpected error"); },
+      success: function(data, textStatus) {
+        $("tr#msg_" + msg_id).slideUp();
+      }
+    });
+  }
 };
 /* End MessageDestroyer */
