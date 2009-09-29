@@ -90,6 +90,11 @@ module JibJob
         end
       end
       
+      def powered_link
+        port = (request.port == 80) ? nil : ":#{request.port}"
+        %Q(<a class="powered" href="#{request.scheme}://#{request.host}#{port}"></a>)
+      end
+      
     end #App
   end #Helpers
 end #JibJob
