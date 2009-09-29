@@ -85,7 +85,11 @@ module JibJob
     end
     
     def unread_messages_count
-      self.resumes.messages(:is_read => false).count
+      if self.has_resume? # We have to do this check because the statement below is not smart
+        self.resumes.messages(:is_read => false).count
+      else
+        0
+      end
     end
     
     def has_unread_messages?
