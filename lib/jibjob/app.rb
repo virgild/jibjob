@@ -32,6 +32,10 @@ module JibJob
     set :recaptcha_privkey, Proc.new { @@_app_config[environment][:recaptcha][:private_key] }
     
     db_config = @@_app_config[environment][:db]
+    
+    if environment == :development
+      DataMapper::Logger.new(STDOUT, :debug)
+    end
     DataMapper.setup(:default, db_config)
     
     # Production config
@@ -48,7 +52,7 @@ module JibJob
       enable :show_exceptions, :static, :dump_errors
       set :public, Proc.new { File.join(root, "static") }
       use Sinatra::Reloader, 0
-      use Rack::Lint    
+      use Rack::Lint
     end
     
     # Test config
