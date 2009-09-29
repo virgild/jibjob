@@ -123,7 +123,7 @@ module JibJob
     get '/logout/?' do
       return redirect("/") unless current_user
       session[:user] = nil
-      flash[:notice] = "You have successfully logged out."
+      session.clear
       redirect "/"
     end
     
