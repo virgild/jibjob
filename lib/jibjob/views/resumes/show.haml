@@ -2,17 +2,19 @@
 .header
   %ul.toolbar
     %li
-      %a{:href => "/resumes"} « Return
-    %li
       %a{:href => "/resumes/#{h @resume.id}/edit"} Edit
-    %li
-      %a{:href => "/resumes/#{h @resume.id}.pdf"} View as PDF
-    %li
-      %a{:href => "/resumes/#{h @resume.id}.txt"} View as Plain Text
     %li
       %a{:href => "/resumes/#{h @resume.id}/messages"} Messages #{unread_messages_count(@resume)}
     %li
       %a.alert{:href => "/resumes/#{h @resume.id}/delete"} Delete
+  %ul.toolbar.formats
+    %li
+      %a{:href => "/resumes/#{h @resume.id}.pdf"}
+        %img{:src => "/images/pdf.png", :width => "32", :height => "32", :title => "Download as PDF"}
+    %li
+      %a{:href => "/resumes/#{h @resume.id}.txt"}
+        %img{:src => "/images/plain_text.png", :width => "32", :height => "32", :title => "Download as plain text"}
+      
   .title Resume Preview
   .subtitle #{h @resume.name}
   .subtitle.url Public URL: #{resume_link(@resume)}

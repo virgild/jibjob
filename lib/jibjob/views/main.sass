@@ -124,7 +124,7 @@ div.ribbon
     background: url('images/headerbg.png') repeat-x
     .title
       font-size: 20px
-      padding-top: 10px
+      padding-top: 5px
       padding-left: 10px
       font-family = !nice_fonts
     .subtitle
@@ -135,20 +135,20 @@ div.ribbon
     ul.toolbar
       float: right
       position: relative
+      margin-right: 10px
       li
         float: left
         a
-          -webkit-border-radius: 6px
-          -moz-border-radius: 6px
-          font-size: 12px
-          font-weight: bold
-          padding: 4px 8px
-          margin-right: 8px
+          -webkit-border-radius: 4px
+          -moz-border-radius: 4px
+          font-size: 11px
+          padding: 4px 6px
+          margin-left: 4px
           display: block
           text-decoration: none
           color: #2B4499
           background: url('images/btnback.png') repeat-x
-          border: solid 1px #ddd
+          border: solid 1px #ccc
           &:hover
             color: #990C03
             background-image: none
@@ -157,8 +157,18 @@ div.ribbon
         a.alert
           background-image: none
           background-color: #B7232C
-          border: solid 1px #B7232C
+          border: none
           color: #fff
+    ul.toolbar.formats
+      clear: right
+      margin-top: 20px
+      li
+        a
+          text-decoration: underline
+          display: block
+          border: none
+          background: none
+          padding: 0
           
 #container.public
   margin-top: 10px
