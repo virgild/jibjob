@@ -16,4 +16,5 @@
       %li
         Date: #{h @message.created_at.strftime("%r %Y-%m-%d")}
     %p.body
-      #{Sanitize.clean(@message.body).gsub("\n", "<br/>")}
+      :plain
+        #{Sanitize.clean(@message.body).gsub("\n", "<br/>")}
