@@ -267,7 +267,7 @@ module JibJob
       @resume.access_code = params[:resume][:access_code]
       
       if @resume.save
-        return redirect("/resumes")
+        flash.now[:notice] = "Resume saved"
       end
       
       show :"resumes/edit"

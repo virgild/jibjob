@@ -20,7 +20,8 @@
             Public URL: #{resume_link(resume)}
             - if resume.requires_access_code?
               %br
-              Access Code: #{h resume.access_code}
+              Access Code: 
+              %span.access_code #{h resume.access_code}
           .clear
   - else
     %h3 You have no resumes.
