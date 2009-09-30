@@ -1,3 +1,5 @@
+# coding: utf-8
+
 module JibJob
   class Resume
     include DataMapper::Resource

@@ -1,3 +1,5 @@
+# coding: utf-8
+
 module JibJob
   class User
     include DataMapper::Resource

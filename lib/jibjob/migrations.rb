@@ -1,3 +1,5 @@
+# coding: utf-8
+
 require 'dm-migrations'
 require 'dm-migrations/migration_runner'
 

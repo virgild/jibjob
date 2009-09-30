@@ -1,3 +1,5 @@
+# coding: utf-8
+
 module Recaptcha
   RECAPTCHA_API_SERVER = 'http://api.recaptcha.net'
   RECAPTCHA_API_SECURE_SERVER = 'https://api-secure.recaptcha.net'

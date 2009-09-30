@@ -1,13 +1,17 @@
-Dir["#{File.dirname(__FILE__)}/helpers/*.rb"].each &method(:require)
+require File.join(File.dirname(__FILE__), "helpers/application")
+require File.join(File.dirname(__FILE__), "helpers/haml")
+require File.join(File.dirname(__FILE__), "helpers/rendering")
+require File.join(File.dirname(__FILE__), "helpers/resume")
+require File.join(File.dirname(__FILE__), "helpers/starters")
+require File.join(File.dirname(__FILE__), "helpers/recaptcha")
 
 module JibJob
   module Helpers
-    include App
-    include Haml
-    include Resume
-    include Debug
-    include Rendering
-    include Starters
+    include AppHelper
+    include HamlHelper
+    include ResumeHelper
+    include RenderingHelper
+    include StarterHelper
     include Rack::Utils
     include Recaptcha::ClientHelper
     include Recaptcha::Verify

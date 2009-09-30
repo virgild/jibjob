@@ -1,7 +1,9 @@
+# coding: utf-8
+
 # General app helpers
 module JibJob
   module Helpers
-    module App
+    module AppHelper
       
       def login_required
         if session[:user]
@@ -42,7 +44,10 @@ module JibJob
       
       def slugify(text)
         return "" if text.blank?
-        str = Iconv.iconv('ascii//ignore//translit', 'utf-8', text).to_s
+        str = text.strip
+        if RUBY_VERSION.split('.')[1].to_i < 9
+          str = Iconv.iconv('ascii//ignore//translit', 'utf-8', text).to_s
+        end
         str.downcase!
         str.gsub! /<.*?>/, ''
         str.gsub! /[\'\"\#\$\,\.\!\?\%\@\(\)]+/, ''
@@ -77,9 +82,9 @@ module JibJob
       end
       
       def send_welcome_email(user)
-        body = erb(:welcome_email, {}, :user => user)
-        Pony.mail(:to => user.email, :from => JibJob::App.noreply_email, 
-          :subject => "Welcome to JibJob", :body => body, :via => :sendmail)
+        # body = erb(:welcome_email, {}, :user => user)
+        # Pony.mail(:to => user.email, :from => JibJob::App.noreply_email, 
+        #   :subject => "Welcome to JibJob", :body => body, :via => :sendmail)
       end
       
       def unread_messages_count(subject)

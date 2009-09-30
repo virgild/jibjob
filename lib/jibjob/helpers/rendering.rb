@@ -1,6 +1,8 @@
+# coding: utf-8
+
 module JibJob
   module Helpers
-    module Rendering
+    module RenderingHelper
       def show(view, options={})
         haml(view, options)
       end

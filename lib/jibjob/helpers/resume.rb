@@ -1,6 +1,8 @@
+# coding: utf-8
+
 module JibJob
   module Helpers
-    module Resume
+    module ResumeHelper
       
       def resume_link(resume, format = :html)
         url = resume_url(resume, format)

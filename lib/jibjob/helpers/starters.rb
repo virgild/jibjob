@@ -1,6 +1,8 @@
+# coding: utf-8
+
 module JibJob
   module Helpers
-    module Starters
+    module StarterHelper
       def resume_starter
         <<-EOR
 #N Thomas B. Seeker

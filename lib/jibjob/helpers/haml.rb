@@ -1,6 +1,8 @@
+# coding: utf-8
+
 module JibJob
   module Helpers
-    module Haml
+    module HamlHelper
       
       def haml_partial(name, options = {})
         item_name = name.to_sym

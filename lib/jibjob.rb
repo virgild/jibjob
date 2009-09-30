@@ -1,13 +1,14 @@
+# coding: utf-8
+
 require 'rubygems'
 
 gems = [
   ['extlib', '>= 0.9.13'],
-  ['sinatra', '0.9.4'],
+  ['sinatra', '>= 0.10.1'],
   ['nakajima-rack-flash', '>= 0.1.0'],
   ['haml', '>= 2.2.4'],
   ['bcrypt-ruby', '>= 2.1.2'],
   ['uuidtools', '>= 2.0.0'],
-  ['rubyzip', '>= 0.9.1'],
   ['resumetools', '>= 0.2.6'],
   ['dm-core', '>= 0.10.0'],
   ['dm-timestamps', '>= 0.10.0'],
@@ -15,8 +16,6 @@ gems = [
   ['dm-constraints', '>= 0.10.0'],
   ['dm-is-viewable', '>= 0.10.0'],
   ['dm-validations', '>= 0.10.0'],
-  ['tmail', '>= 1.2.3.1'],
-  ['pony', '>= 0.3'],
   ['sanitize', '>= 1.0.8']
 ]
 
@@ -41,12 +40,7 @@ require 'haml'
 require 'sass'
 require 'bcrypt'
 require 'uuidtools'
-require 'zip/zip'
-require 'zip/zipfilesystem'
-require 'tempfile'
 require 'resumetools'
-require 'tmail'
-require 'pony'
 require 'net/http'
 require 'cgi'
 require 'sanitize'
