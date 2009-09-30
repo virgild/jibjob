@@ -13,9 +13,12 @@
           %a.name{:href => "/resumes/#{resume.id}.html"} #{h resume.name}
           .buttons
             %a{:href => "/resumes/#{resume.id}/edit"} Edit
-            %a{:href => "/resumes/#{resume.id}.pdf"} View as PDF
-            %a{:href => "/resumes/#{resume.id}.txt"} View as Plain Text
             %a{:href => "/resumes/#{resume.id}/messages"} Messages #{unread_messages_count(resume)}
+          .formats
+            %a{:href => "/resumes/#{resume.id}.pdf"}
+              %img{:src => "/images/pdf.png", :width => "32", :height => "32", :title => "Download as PDF"}
+            %a{:href => "/resumes/#{resume.id}.txt"}
+              %img{:src => "/images/plain_text.png", :width => "32", :height => "32", :title => "Download as plain text"}
           .details
             Public URL: #{resume_link(resume)}
             - if resume.requires_access_code?
