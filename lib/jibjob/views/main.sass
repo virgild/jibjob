@@ -101,12 +101,10 @@ div.ribbon
         font-weight: bold
         &:hover
           text-decoration: underline
-          //background-color: #333
           color: #ddd
         &:active
           outline: none
         &:focus
-          //background-color: #333
           outline: none
       .unread_count
         float: left
@@ -121,18 +119,22 @@ div.ribbon
     padding: 20px
   
   .header
-    padding: 20px
-    border-bottom: solid 1px #eee
-    padding-bottom: 10px
+    padding: 10px
+    border-bottom: solid 1px #ddd
     background: url('images/headerbg.png') repeat-x
-    h1
+    .title
       font-size: 20px
-    h2
+      padding-top: 10px
+      padding-left: 10px
+      font-family = !nice_fonts
+    .subtitle
       font-size: 14px
+      padding-top: 5px
+      padding-left: 10px
+      font-family = !nice_fonts
     ul.toolbar
       float: right
       position: relative
-      height: 32px
       li
         float: left
         a
@@ -224,13 +226,15 @@ ul.nicelist
 
 .preview
   position: relative
-  background-color: #ccc
+  background-color: #eee
   padding: 20px
   
   .resume
     padding: 50px
     padding-top: 20px
     background-color: #fff
+    border-bottom: solid 2px #ddd
+    border-left: solid 1px #ddd
     .header
       border-bottom: none !important
       text-align: center

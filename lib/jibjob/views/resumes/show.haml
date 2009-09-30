@@ -13,11 +13,11 @@
       %a{:href => "/resumes/#{h @resume.id}/messages"} Messages #{unread_messages_count(@resume)}
     %li
       %a.alert{:href => "/resumes/#{h @resume.id}/delete"} Delete
-  %h1 Resume Preview
-  %h2 #{h @resume.name}
-  %h2 Public URL: #{resume_link(@resume)}
+  .title Resume Preview
+  .subtitle #{h @resume.name}
+  .subtitle.url Public URL: #{resume_link(@resume)}
   - if @resume.requires_access_code?
-    %h2 Access Code: #{@resume.access_code}
+    .subtitle.access_code Access Code: #{@resume.access_code}
 
 - if @resume
   = haml("resumes/_preview".to_sym, :layout => false, :locals => { :resume => @resume })

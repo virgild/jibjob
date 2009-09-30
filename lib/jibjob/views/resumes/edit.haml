@@ -5,8 +5,8 @@
       %a{:href => "/resumes/#{h @resume.id}.html"} « Preview
     %li
       %a.alert{:href => "/resumes/#{h @resume.id}/delete"} Delete
-  %h1 Edit Resume
-  %h2 #{h @resume.name}
+  .title Edit Resume
+  .subtitle #{h @resume.name}
   
 .content
   = error_messages_for @resume

@@ -3,8 +3,8 @@
   %ul.toolbar
     %li
       %a{:href => "/resumes/#{h @resume.id}/messages"} « Messages
-  %h1 Message
-  %h2 #{h @message.subject}
+  .title Message
+  .subtitle #{h @message.subject}
   
 .content
   .message_view
