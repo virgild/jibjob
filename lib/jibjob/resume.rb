@@ -22,6 +22,17 @@ module JibJob
     validates_present :slug, :message => "A friendly name is required"
     validates_is_unique :name, :scope => :user_id, :message => "This name is already used"
     validates_is_unique :slug, :message => "This friendly name is already used"
+    validates_length :name, :min => 4, :max => 50, 
+      :unless => Proc.new { |r| r.name.blank? }, 
+      :message => "The name must be 4 to 30 characters"
+    validates_length :slug, :min => 4, :max => 30,
+      :unless => Proc.new { |r| r.slug.blank? },
+      :message => "The friendly name must be 4 to 30 characters"
+    validates_length :content, :max => 24000,
+      :unless => Proc.new { |r| r.content.blank? },
+      :message => "The content is exceedingly long"
+    validates_length :access_code, :max => 12,
+      :unless => Proc.new { |r| r.access_code.blank? }
              
     default_scope(:default).update(:order => [:created_at.desc])
     

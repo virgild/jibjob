@@ -117,7 +117,7 @@ module JibJob
           return redirect("/resumes")
         end
       end
-      flash[:login_notice] = "Invalid username/password"
+      flash.now[:login_notice] = "Invalid username/password"
       show :login, :locals => { :username => params[:username] }
     end
     
@@ -164,6 +164,7 @@ module JibJob
         if @user.save
           send_welcome_email(@user) if (self.class.environment == :production)
           write_welcome_cookie
+          session[:user] = @user.username
           return redirect("/welcome")
         end
       else
@@ -192,9 +193,13 @@ module JibJob
     post '/resumes/?' do
       require_user
       check_resume_count_limit
-      slug = slugify(params[:resume][:slug])
-      @resume = current_user.resumes.new(params[:resume])
-      @resume.slug = slug
+
+      @resume = current_user.resumes.new
+      @resume.slug = slugify(Sanitize.clean(params[:resume][:slug]))
+      @resume.name = Sanitize.clean(params[:resume][:name])
+      @resume.access_code = Sanitize.clean(params[:resume][:access_code])
+      @resume.content = Sanitize.clean(params[:resume][:content])
+      
       if @resume.save
         return redirect("/resumes")
       end    
@@ -261,10 +266,10 @@ module JibJob
       require_user
       @resume = current_user.resumes.get(params[:id])
 
-      @resume.name = params[:resume][:name]
-      @resume.slug = slugify(params[:resume][:slug])
-      @resume.content = params[:resume][:content]
-      @resume.access_code = params[:resume][:access_code]
+      @resume.slug = slugify(Sanitize.clean(params[:resume][:slug]))
+      @resume.name = Sanitize.clean(params[:resume][:name])
+      @resume.access_code = Sanitize.clean(params[:resume][:access_code])
+      @resume.content = Sanitize.clean(params[:resume][:content])
       
       if @resume.save
         flash.now[:notice] = "Resume saved"

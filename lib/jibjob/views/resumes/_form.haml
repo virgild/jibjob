@@ -4,16 +4,16 @@
       %label{:for => "resume_name"} Name:
       .marker Required
       .desc Name of this resume
-      %input#resume_name.text{:type => "text", :size => 40, :name => "resume[name]", :value => @resume.name, :maxlength => 50}
+      %input#resume_name.text{:type => "text", :size => 50, :name => "resume[name]", :value => @resume.name, :maxlength => 50}
     %li
       %label{:for => "resume_slug"} Friendly Name:
       .marker Required
-      .desc A URL friendy name (e.g. paul-web-developer)
-      %input#resume_slug.text{:type => "text", :size => 40, :name => "resume[slug]", :value => @resume.slug, :maxlength => 50}
+      .desc A friendy name that appears in the public URL.
+      %input#resume_slug.text{:type => "text", :size => 30, :name => "resume[slug]", :value => @resume.slug, :maxlength => 30}
     %li
       %label{:for => "resume_access_code"} Access Code:
       .marker.optional Optional
-      .desc An access code for this resume
+      .desc Access code to view this resume in public
       %input#resume_access_code.text{:type => "text", :size => 12, :name => "resume[access_code]", :value => @resume.access_code, :maxlength => 12}
     %li
       %label{:for => "resume_content"} Content:
@@ -24,3 +24,8 @@
           = @resume.content
 %fieldset.submit
   %input{:type => "submit", :value => "Submit"}
+  
+:javascript
+  $(document).ready(function(){
+    $("#resume_name").focus();
+  });

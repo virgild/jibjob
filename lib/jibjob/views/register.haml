@@ -10,12 +10,11 @@
         %li
           %label{:for => "user_username"} Username:
           .marker Required
-          .desc 5-30 alphanumeric characters. No spaces or weird characters.
+          .desc 5-30 alphanumeric characters / underscore. No spaces.
           %input#user_username.text{:type => "text", :size => 30, :maxlength => 50, :name => "user[username]", :value => @user.username}
         %li
           %label{:for => "user_email"} E-mail:
           .marker Required
-          .desc Valid e-mail format only.
           %input#user_email.text{:type => "text", :size => 30, :maxlength => 50, :name => "user[email]", :value => @user.email}
         %li
           %label{:for => "user_password"} Password:
@@ -25,12 +24,12 @@
         %li
           %label{:for => "user_password_confirmation"} Confirm Password:
           .marker Required
-          .desc Password confirmation
+          .desc Enter the password again
           %input#user_password.text{:type => "password", :size => 30, :name => "user[password_confirmation]"}
         %li
           %label{:for => "agreed_terms"} Agree to Terms of Service
           .marker Required
-          .desc I agree to the terms of service of this website
+          .desc I agree to the <a href="/terms">terms of service</a> of this website
           %input#agreed_terms{:type => "checkbox", :name => "user[agreed_terms]", :checked => @user.agreed_terms || nil}
           %label.side{:for => "agreed_terms"} Yes, I agree.
     %fieldset
