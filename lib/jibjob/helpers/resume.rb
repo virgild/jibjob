@@ -12,7 +12,7 @@ module JibJob
       def resume_url(resume, format = :html)
         format = 'html' if format.blank?
         port = (request.port == 80) ? nil : ":#{request.port}"        
-        ext = (format.to_s == 'html') ? '' : ".#{format.to_s}"
+        ext = ".#{format.to_s}"
         file = "#{h resume.slug}#{ext}"
         %Q(#{request.scheme}://#{request.host}#{port}/view/#{file})
       end

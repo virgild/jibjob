@@ -1,17 +1,23 @@
 - @title = h "JibJob - Access Resume"
 .access_screen
-  %form{:action => "/access/#{@resume.slug}", :method => 'POST'}
-    %input{:type => "hidden", :name => "format", :value => @format}
+  %form{:action => "/access/#{@resume.slug}.#{@format}", :method => 'POST'}
     - if @resume.requires_access_code?
       %fieldset
-        %h1 An access code is required to view this document.
-        %label{:for => "access_code"} Access Code:
+        %h1 An access code is required to view this document.          
+        - if flash[:access_code_error]
+          %label.access_error{:for => "access_code"} Enter the correct access code:
+        - else
+          %label{:for => "access_code"} Access Code:
         %input#access_code{:type => "text", :name => "access_code"}
     %fieldset
       %div{:style => "margin-top:30px;"}
-      %h3 Type the two words below:
+      - if flash[:access_recaptcha_error]
+        %h3.access_error Please type the words below again:
+      - else
+        %h3 Type the two words below to proceed:
       %div{:style => "margin:0 auto; width: 450px"}
         = recaptcha_tags :display => { :theme => "clean" }
+      
     %fieldset
       %input.submit{:type => "submit", :value => "Submit"}
 

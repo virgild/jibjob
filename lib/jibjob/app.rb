@@ -342,17 +342,19 @@ module JibJob
         "ERROR"
       end      
     end
-
+    
+    get %r{/view/([\w-]+)$} do |slug|
+      return redirect("/view/#{slug}.html")
+    end
+    
     # GET - resume public view
-    get %r{/view/([\w-]+)(\.(\w+))?} do |slug, ext, format|
+    get '/view/:slug.:format' do |slug, format|
       @resume = Resume.first(:slug => slug)
       
       if @resume.nil?
         status 404
         return
       end
-      
-      format ||= 'html'
       
       unless has_public_access?(@resume)
         return redirect("/access/#{slug}.#{format}")
@@ -379,28 +381,32 @@ module JibJob
     end
 
     # Resume access form
-    get '/access/:slug.:format/?' do |slug, format|
+    get '/access/:slug.:format' do |slug, format|
       @resume = Resume.first(:slug => slug)
       if @resume.nil?
         status 404
         return
       end
+      
+      format = :html if format.blank?
       
       if has_public_access?(@resume)
         return redirect(resume_url(@resume, format))
       end
       
       @format = format
-      show :"resumes/access", :layout => :"layouts/public_view"
+      show :"resumes/access", :layout => :"layouts/public_layout"
     end
 
     # Resume submit access code form
-    post '/access/:slug/?' do |slug|
+    post '/access/:slug.:format' do |slug, format|
       @resume = Resume.first(:slug => slug)
       if @resume.nil?
         status 404
         return
       end
+      
+      @format = format
       
       if has_public_access?(@resume)
         return redirect(resume_url(@resume, format))
@@ -409,11 +415,15 @@ module JibJob
       if !@resume.requires_access_code? || params[:access_code] == @resume.access_code
         if verify_recaptcha()
           write_public_view_cookie @resume
-          return redirect(resume_url(@resume, params[:format]))
+          return redirect(resume_url(@resume,format))
+        else
+          flash.now[:access_recaptcha_error] = true
         end
+      else
+        flash.now[:access_code_error] = true
       end
       
-      show :"resumes/access", :layout => :"layouts/public_view"
+      show :"resumes/access", :layout => :"layouts/public_layout"
     end
     
     # Account
