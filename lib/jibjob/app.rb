@@ -372,7 +372,7 @@ module JibJob
           return body(@resume.render_json)
         when 'html'
           @title = @resume.data.full_name
-          show :"resumes/public_show", :layout => :"layouts/public_view", :locals => { :resume => @resume.data }
+          show :"resumes/public_show", :layout => :"layouts/public_layout", :locals => { :resume => @resume.data }
         else
           status 404
       end
