@@ -68,7 +68,7 @@ module JibJob
       end
       
       def write_public_view_cookie(resume)
-        response.set_cookie("jibjob.resume.#{resume.slug}",
+        response.set_cookie("jibjob.resume.#{resume.id}",
           :domain => options.cookie_domain,
           :path => "/",
           :value => resume.generate_access_cookie(request.ip),

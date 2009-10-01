@@ -33,7 +33,7 @@ module JibJob
       end
       
       def has_public_access?(resume)
-        resume.valid_access_cookie? request.cookies["jibjob.resume.#{resume.slug}"], request.ip
+        resume.valid_access_cookie? request.cookies["jibjob.resume.#{resume.id}"], request.ip
       end
       
     end
