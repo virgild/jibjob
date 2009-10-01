@@ -195,9 +195,9 @@ module JibJob
       check_resume_count_limit
 
       @resume = current_user.resumes.new
-      @resume.slug = slugify(Sanitize.clean(params[:resume][:slug]))
-      @resume.name = Sanitize.clean(params[:resume][:name])
-      @resume.access_code = Sanitize.clean(params[:resume][:access_code])
+      @resume.name = Sanitize.clean(h params[:resume][:name])
+      @resume.slug = slugify(Sanitize.clean(h params[:resume][:slug]))
+      @resume.access_code = Sanitize.clean(h params[:resume][:access_code])
       @resume.content = Sanitize.clean(params[:resume][:content])
       
       if @resume.save
@@ -265,10 +265,10 @@ module JibJob
     put '/resumes/:id/?' do
       require_user
       @resume = current_user.resumes.get(params[:id])
-
-      @resume.slug = slugify(Sanitize.clean(params[:resume][:slug]))
-      @resume.name = Sanitize.clean(params[:resume][:name])
-      @resume.access_code = Sanitize.clean(params[:resume][:access_code])
+      
+      @resume.name = Sanitize.clean(h params[:resume][:name])
+      @resume.slug = slugify(Sanitize.clean(h params[:resume][:slug]))
+      @resume.access_code = Sanitize.clean(h params[:resume][:access_code])
       @resume.content = Sanitize.clean(params[:resume][:content])
       
       if @resume.save
