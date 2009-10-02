@@ -20,6 +20,10 @@
 =shadowed-text
   text-shadow: -1px 1px #{!bgcolor * 1.1}
 
+=round-corners(!size = 8px)
+  -webkit-border-radius = !size
+  -moz-border-radius = !size
+
 h1, h2, h3, h4, h5
   font-weight: bold
   font-family = !nice_fonts
@@ -113,8 +117,7 @@ div.ribbon
   
 #container
   +acts_like_container
-  position: relative
-  
+
   .content
     padding: 20px
   
@@ -176,6 +179,7 @@ div.ribbon
   
 #footer
   +acts_like_container
+  clear: both
   background-color = !bgcolor * 1.2
   text-align: center
   min-height: 50px
@@ -591,3 +595,11 @@ table.msglist
   ul
     li
       line-height: 32px
+
+.frontpage
+  .section
+
+    h1, h2, h3, h4
+      margin: 5px 0
+    p
+      margin: 5px 0 20px 0
