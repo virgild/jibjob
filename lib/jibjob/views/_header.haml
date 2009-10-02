@@ -2,13 +2,13 @@
   .ribbon
   %a.logo{:title => "JibJob", :href => "/"}
     %h1 JibJob
-  %p.sub The résumé distribution center
+  %p.sub Quick Resume Generator
   %ul
     %li
       %a{:href => "/"} Home
     - unless session[:user]
       %li
-        %a{:href => "/register"} Register
+        %a{:href => "/signup"} Sign up
     - if session[:user]
       %li
         %a{:href => "/resumes"} My Resumes

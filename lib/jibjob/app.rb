@@ -150,14 +150,18 @@ module JibJob
     get '/privacy/?' do
       show :privacy
     end
+    
+    get '/help/resume' do
+      show :"resume_help"
+    end
 
     # Register user
-    get '/register' do
+    get '/signup' do
       @user = JibJob::User.new
       show :register
     end
     
-    post '/register' do      
+    post '/signup' do
       @user = User.new(params[:user])
                   
       if verify_recaptcha()

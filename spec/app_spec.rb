@@ -108,12 +108,12 @@ describe JibJob::App do
   
   describe "user registration" do
     it "should show the registration page" do
-      get "/register"
+      get "/signup"
       status.should == 200
     end
     
     it "should register valid form" do
-      get "/register"
+      get "/signup"
       status.should == 200
       
       form_data = {
@@ -123,13 +123,13 @@ describe JibJob::App do
         "user[agreed_terms]" => "on",
         "user[email]" => "tester@local"
       }
-      post "/register", form_data
+      post "/signup", form_data
       follow_redirect!
       location.should == "/welcome"
     end
     
     it "should not register invalid form" do
-      get "/register"
+      get "/signup"
       status.should == 200
       
       form_data = {
@@ -139,9 +139,9 @@ describe JibJob::App do
         "user[agreed_terms]" => "on",
         "user[email]" => "tester@local"
       }
-      post "/register", form_data
+      post "/signup", form_data
       status.should == 200
-      location.should == "/register"
+      location.should == "/signup"
     end
   end
   
