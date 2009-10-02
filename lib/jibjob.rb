@@ -10,12 +10,12 @@ gems = [
   ['bcrypt-ruby', '>= 2.1.2'],
   ['uuidtools', '>= 2.0.0'],
   ['resumetools', '>= 0.2.6'],
-  ['dm-core', '>= 0.10.0'],
-  ['dm-timestamps', '>= 0.10.0'],
-  ['dm-aggregates', '>= 0.10.0'],
-  ['dm-constraints', '>= 0.10.0'],
-  ['dm-is-viewable', '>= 0.10.0'],
-  ['dm-validations', '>= 0.10.0'],
+  ['dm-core', '>= 0.10.1'],
+  ['dm-timestamps', '>= 0.10.1'],
+  ['dm-aggregates', '>= 0.10.1'],
+  ['dm-constraints', '>= 0.10.1'],
+  ['dm-is-viewable', '>= 0.10.1'],
+  ['dm-validations', '>= 0.10.1'],
   ['sanitize', '>= 1.0.8']
 ]
 
