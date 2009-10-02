@@ -71,7 +71,7 @@ module JibJob
     # Racks
     configure :development, :production do
       use Rack::Session::Cookie, :key => "jibjob.session",
-                                 :domain => self.cookie_domain,
+                                 :httponly => true,
                                  :path => "/",
                                  :expire_after => 3600 * 24,
                                  :secret => self.cookie_secret
