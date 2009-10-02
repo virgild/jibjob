@@ -26,7 +26,6 @@ module JibJob
     set :root, File.dirname(__FILE__) + "/../.."
     set :views, Proc.new { File.join(File.dirname(__FILE__), "views") }
     enable :methodoverride, :logging
-    set :cookie_domain, Proc.new { @@_app_config[environment][:cookie_domain] }
     set :cookie_secret, Proc.new { @@_app_config[environment][:cookie_secret] }
     set :noreply_email, Proc.new { @@_app_config[environment][:email][:noreply] }
     set :recaptcha_pubkey, Proc.new { @@_app_config[environment][:recaptcha][:public_key] }

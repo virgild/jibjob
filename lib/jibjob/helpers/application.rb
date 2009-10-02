@@ -59,7 +59,7 @@ module JibJob
       end
       
       def write_welcome_cookie
-        response.set_cookie("jibjob.welcome", :domain => options.cookie_domain, 
+        response.set_cookie("jibjob.welcome",
           :path => "/", 
           :value => "1", 
           :expires => Time.now + (60 * 5),
@@ -69,7 +69,6 @@ module JibJob
       
       def write_public_view_cookie(resume)
         response.set_cookie("jibjob.resume.#{resume.id}",
-          :domain => options.cookie_domain,
           :path => "/",
           :value => resume.generate_access_cookie(request.ip),
           :expires => Time.now + 3600 * 24,

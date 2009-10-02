@@ -4,7 +4,6 @@
     :database:
     :username:
     :host:
-  :cookie_domain: 
   :cookie_secret: 
   :email:
     :noreply: no-reply@local
@@ -18,7 +17,6 @@
     :database:
     :username:
     :host:
-  :cookie_domain: 
   :cookie_secret:
   :email:
     :noreply: no-reply@local
@@ -33,7 +31,6 @@
     :host:
     :username: 
     :password: 
-  :cookie_domain: 
   :cookie_secret: 
   :email:
     :noreply: no-reply@local
