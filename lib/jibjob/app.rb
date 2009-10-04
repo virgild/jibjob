@@ -201,7 +201,7 @@ module JibJob
       @resume.name = Sanitize.clean(h params[:resume][:name])
       @resume.slug = slugify(Sanitize.clean(h params[:resume][:slug]))
       @resume.access_code = Sanitize.clean(h params[:resume][:access_code])
-      @resume.content = Sanitize.clean(params[:resume][:content])
+      @resume.content = params[:resume][:content]
       
       if @resume.save
         return redirect("/resumes")
@@ -272,7 +272,7 @@ module JibJob
       @resume.name = Sanitize.clean(h params[:resume][:name])
       @resume.slug = slugify(Sanitize.clean(h params[:resume][:slug]))
       @resume.access_code = Sanitize.clean(h params[:resume][:access_code])
-      @resume.content = Sanitize.clean(params[:resume][:content])
+      @resume.content = params[:resume][:content]
       
       if @resume.save
         flash.now[:notice] = "Resume saved"

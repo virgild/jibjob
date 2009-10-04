@@ -14,7 +14,7 @@ module JibJob
     property :updated_at, DateTime
     property :agreed_terms, String    
     
-    has n, :resumes, :model => "JibJob::Resume"
+    has n, :resumes, :model => "JibJob::Resume", :constraint => :destroy
     has n, :api_keys, :model => "JibJob::APIKey"
     
     validates_present :username, :message => "A username is required"
