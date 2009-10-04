@@ -1,4 +1,18 @@
 - @title = "JibJob - Home"
+
+- unless current_user
+  %form.loginpanel{:action => "/login", :method => "POST"}
+    %h4 Login
+    %ul
+      %li
+        %label{:for => "username"} Username:
+        %input.text#username{:type => "text", :name => "username"}
+      %li
+        %label{:for => "password"} Password:
+        %input.text#password{:type => "password", :name => "password"}
+    %input.button{:type => "submit", :value => "Login"}
+    %a.signup{:href => "/signup"} Sign up
+  
 .content
   .frontpage
     .section
@@ -8,9 +22,18 @@
         lets you compose your resumes using plain text and generate a PDF file or 
         a formatted text version. Click here to view a sample generated resume.
     
+        [image of plain text file icon with arrows to pdf and formatted text]
+        
     .section
       %h3 Resume Text Format
       %p
-        Resume text format allows you to create resumes in plain text. There is no
-        need to format documents in word processors. Your resume data can be then 
-        transformed into different formats like HTML pages and PDF documents.
+        Resume Text Format is a simple way of writing resumes that focuses on
+        the content.
+
+    .section
+      %h3 Open Source
+      %p
+        JibJob is written using <a href="http://www.sinatrarb.com">Sinatra</a>, 
+        the micro web framework on Ruby. The source code 
+        is available at <a href="http://github.com/virgild/jibjob">GitHub</a>. 
+        It is release under the MIT open source license.

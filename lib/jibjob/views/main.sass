@@ -38,12 +38,20 @@ h4
   font-size: 16px
 h5
   font-size: 14px
+  
+a
+  color: #800
 
 div.clear
   clear: both
 
 .centered
   text-align: center
+  
+ul.bullet
+  li
+    list-style: disc
+    margin-left: 20px
 
 html
   background-color = !bgcolor
@@ -75,6 +83,7 @@ div.ribbon
     background: url('images/logo.png') no-repeat
     width: 98px
     height: 42px
+    outline: none
     h1
       display: none
   p.sub
@@ -117,10 +126,10 @@ div.ribbon
   
 #container
   +acts_like_container
-
   .content
     padding: 20px
-  
+    p
+      margin-top: 10px
   .header
     padding: 10px
     border-bottom: solid 1px #ddd
@@ -152,6 +161,7 @@ div.ribbon
           color: #2B4499
           background: url('images/btnback.png') repeat-x
           border: solid 1px #ccc
+          outline: none
           &:hover
             color: #990C03
             background-image: none
@@ -193,8 +203,7 @@ div.ribbon
 ul.nicelist
   li
     padding: 10px
-    -webkit-border-radius: 4px
-    -moz-border-radius: 4px
+    +round-corners(10px)
     border: solid 1px #ddd
     margin-bottom: 10px
     a
@@ -211,8 +220,7 @@ ul.nicelist
       float: right
       a
         font-size: 11px
-        -webkit-border-radius: 4px
-        -moz-border-radius: 4px
+        +round-corners(4px)
         border: solid 1px #ccc
         border-bottom: solid 2px #ccc
         text-decoration: none
@@ -230,17 +238,14 @@ ul.nicelist
     .details
       clear: left
       float: left
-      margin-top: 20px
+      margin-top: 15px
       line-height: 18px
       font-size: 14px
-      border: solid 1px #ccc
-      -webkit-border-radius: 4px
-      -moz-border-radius: 4px
-      padding: 5px
-      background: #e7e7e7
+      padding: 5px 5px 5px 0
       .access_code
         color: #ccc
         font-family = !monospace_fonts
+        font-size: 11px
 
 .preview
   position: relative
@@ -603,3 +608,33 @@ table.msglist
       margin: 5px 0
     p
       margin: 5px 0 20px 0
+    dl
+      dt
+        font-weight: bold
+        margin-bottom: 5px
+      dd
+        margin-bottom: 5px
+        
+form.loginpanel
+  +round-corners
+  background: #ccc
+  padding: 10px
+  overflow: hidden
+  position: relative
+  float: right
+  margin: 20px
+  ul
+    li
+      label
+        float: left
+        width: 65px
+      input.text
+        width: 100px
+  input.button
+    margin-top: 5px
+    float: left
+  a.signup
+    color: #000
+    display: block
+    margin-top: 5px
+    float: right
