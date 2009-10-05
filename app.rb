@@ -1,5 +1,8 @@
 # coding: utf-8
 
+RACK_ENV = ENV["RACK_ENV"] ||= "development" unless defined? RACK_ENV
+ROOT_DIR = $0 unless defined? ROOT_DIR
+
 require 'rubygems'
 
 gems = [
@@ -61,13 +64,8 @@ require dir / 'lib' / 'message'
 require dir / 'lib' / 'helpers'
 
 
-class Sinatra::Reloader < Rack::Reloader
-  def safe_load(file, mtime, stderr=$stderr)
-    if file == __FILE__
-      ::JibJob::App.reset!
-    end
-    super
-  end
+def root_path(*args)
+  File.join(ROOT_DIR, *args)
 end
 
 module JibJob
@@ -101,10 +99,11 @@ module JibJob
     # Development config
     configure :development do
       require 'ruby-debug'
+      require 'lib/reloader'
       
       enable :show_exceptions, :static, :dump_errors
       set :public, Proc.new { File.join(root, "static") }
-      use Sinatra::Reloader, 0
+      use JibJob::Reloader, self
       use Rack::Lint
     end
     
