@@ -1,11 +1,64 @@
 # coding: utf-8
 
+require 'rubygems'
+
+gems = [
+  ['extlib', '>= 0.9.13'],
+  ['sinatra', '>= 0.10.1'],
+  ['nakajima-rack-flash', '>= 0.1.0'],
+  ['haml', '>= 2.2.4'],
+  ['bcrypt-ruby', '>= 2.1.2'],
+  ['uuidtools', '>= 2.0.0'],
+  ['resumetools', '>= 0.2.6'],
+  ['dm-core', '>= 0.10.1'],
+  ['dm-timestamps', '>= 0.10.1'],
+  ['dm-aggregates', '>= 0.10.1'],
+  ['dm-constraints', '>= 0.10.1'],
+  ['dm-is-viewable', '>= 0.10.1'],
+  ['dm-validations', '>= 0.10.1'],
+  ['sanitize', '>= 1.0.8']
+]
+
+gems.each do |name, version|
+  if File.directory?(File.expand_path(File.dirname(__FILE__) + "/../vendor/#{name}"))
+    $:.unshift "#{File.dirname(__FILE__)}/../vendor/#{name}/lib"
+    require name
+  else
+    if version
+      gem name, version
+    else
+      gem name
+    end
+  end
+end
+
+require 'extlib'
+require 'iconv'
+require 'sinatra/base'
+require 'rack/flash'
+require 'haml'
+require 'sass'
+require 'bcrypt'
+require 'uuidtools'
+require 'resumetools'
+require 'net/http'
+require 'cgi'
+require 'sanitize'
+
+require 'dm-core'
+require 'dm-timestamps'
+require 'dm-aggregates'
+require 'dm-constraints'
+require 'dm-is-viewable'
+require 'dm-validations'
+
+
 dir = Pathname(__FILE__).dirname.expand_path
 
-require dir / 'user'
-require dir / 'resume'
-require dir / 'message'
-require dir / 'helpers'
+require dir / 'lib' / 'user'
+require dir / 'lib' / 'resume'
+require dir / 'lib' / 'message'
+require dir / 'lib' / 'helpers'
 
 
 class Sinatra::Reloader < Rack::Reloader
@@ -19,12 +72,12 @@ end
 
 module JibJob
   class App < Sinatra::Base
-    @@_app_config = YAML.load_file(File.expand_path("#{File.dirname(__FILE__)}/../../config.yml")).freeze
+    @@_app_config = YAML.load_file(File.expand_path("#{File.dirname(__FILE__)}/config.yml")).freeze
     
     # Default config
     set :app_file, __FILE__
-    set :root, File.dirname(__FILE__) + "/../.."
-    set :views, Proc.new { File.join(File.dirname(__FILE__), "views") }
+    set :root, File.dirname(__FILE__)
+    set :views, Proc.new { File.join(File.dirname(__FILE__), "lib/views") }
     enable :methodoverride, :logging
     set :cookie_secret, Proc.new { @@_app_config[environment][:cookie_secret] }
     set :noreply_email, Proc.new { @@_app_config[environment][:email][:noreply] }
@@ -34,7 +87,7 @@ module JibJob
     db_config = @@_app_config[environment][:db]
     
     if environment == :development
-      DataMapper::Logger.new(STDOUT, :debug)
+      #DataMapper::Logger.new(STDOUT, :debug)
     end
     DataMapper.setup(:default, db_config)
     
@@ -259,6 +312,9 @@ module JibJob
       when 'json'
         content_type "application/json"
         return body(@resume.render_json)
+      when 'resume'
+        content_type "text/plain"
+        return body(@resume.data.export)
       end
       status 404
       ""

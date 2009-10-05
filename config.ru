@@ -5,6 +5,6 @@ end
 
 require 'rubygems'
 require 'rack'
-require 'lib/jibjob'
+require 'app'
 
 run JibJob::App

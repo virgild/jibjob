@@ -4,8 +4,8 @@ require 'rubygems'
 require 'spec'
 require 'spec/interop/test'
 
-require File.join(File.dirname(__FILE__), "..", "lib", "jibjob")
-require File.join(File.dirname(__FILE__), "../lib/jibjob/migrations")
+require File.join(File.dirname(__FILE__), "..", "app")
+require File.join(File.dirname(__FILE__), "../lib/migrations")
 
 
 # TestCase additions

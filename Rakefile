@@ -6,7 +6,7 @@ task :default => :spec
 desc "Run specs"
 task :spec do
   Spec::Rake::SpecTask.new do |t|
-    t.rcov = true
+    t.rcov = false
     t.spec_opts = %w(--colour --format=specdoc --loadby mtime --reverse)
     t.spec_files = FileList['spec/*_spec.rb']
   end
