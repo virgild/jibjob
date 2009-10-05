@@ -25,8 +25,8 @@ end
 namespace :db do
   desc "Migrate database"
   task :migrate do
-    require File.join(File.dirname(__FILE__), "lib/jibjob")
-    require File.join(File.dirname(__FILE__), "lib/jibjob/migrations")
+    require File.join(File.dirname(__FILE__), "app")
+    require File.join(File.dirname(__FILE__), "lib/migrations")
     JibJob::Migrations.migrate_up!
   end
 end
