@@ -36,46 +36,6 @@ module JibJob
         end
       end
       
-      def check_resume_count_limit
-        unless current_user.can_add_resume?
-          redirect "/resumes"
-        end
-      end
-      
-      def slugify(text)
-        return "" if text.blank?
-        str = text.strip
-        if RUBY_VERSION.split('.')[1].to_i < 9
-          str = Iconv.iconv('ascii//ignore//translit', 'utf-8', text).to_s
-        end
-        str.downcase!
-        str.gsub! /<.*?>/, ''
-        str.gsub! /[\'\"\#\$\,\.\!\?\%\@\(\)]+/, ''
-        str.gsub! /\&/, 'and'
-        str.gsub! /\_/, '-'
-        str.gsub! /[\W^-_]+/, '-'
-        str.gsub! /(\-)+/, '-'
-        str
-      end
-      
-      def write_welcome_cookie
-        response.set_cookie("jibjob.welcome",
-          :path => "/", 
-          :value => "1", 
-          :expires => Time.now + (60 * 5),
-          :secure => false, 
-          :httponly => true)
-      end
-      
-      def write_public_view_cookie(resume)
-        response.set_cookie("jibjob.resume.#{resume.id}",
-          :path => "/",
-          :value => resume.generate_access_cookie(request.ip),
-          :expires => Time.now + 3600 * 24,
-          :secure => false,
-          :httponly => true)
-      end
-      
       def error_messages_for(subject)
         haml(:complaints, :layout => false, :locals => { :subject => subject })
       end
@@ -84,14 +44,6 @@ module JibJob
         # body = erb(:welcome_email, {}, :user => user)
         # Pony.mail(:to => user.email, :from => JibJob::App.noreply_email, 
         #   :subject => "Welcome to JibJob", :body => body, :via => :sendmail)
-      end
-      
-      def unread_messages_count(subject)
-        if subject.has_unread_messages?
-          %{<span class="unread_count">#{subject.unread_messages_count}</span>}
-        else
-          ''
-        end
       end
             
     end #App

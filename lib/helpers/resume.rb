@@ -32,8 +32,38 @@ module JibJob
         elements.join(", ").concat("#{date}")
       end
       
+      def check_resume_count_limit
+        unless current_user.can_add_resume?
+          redirect "/resumes"
+        end
+      end
+      
       def has_public_access?(resume)
         resume.valid_access_cookie? request.cookies["jibjob.resume.#{resume.id}"], request.ip
+      end
+      
+      def slugify(text)
+        return "" if text.blank?
+        str = text.strip
+        if RUBY_VERSION.split('.')[1].to_i < 9
+          str = Iconv.iconv('ascii//ignore//translit', 'utf-8', text).to_s
+        end
+        str.downcase!
+        str.gsub! /<.*?>/, ''
+        str.gsub! /[\'\"\#\$\,\.\!\?\%\@\(\)]+/, ''
+        str.gsub! /\&/, 'and'
+        str.gsub! /\_/, '-'
+        str.gsub! /[\W^-_]+/, '-'
+        str.gsub! /(\-)+/, '-'
+        str
+      end
+      
+      def unread_messages_count(subject)
+        if subject.has_unread_messages?
+          %{<span class="unread_count">#{subject.unread_messages_count}</span>}
+        else
+          ''
+        end
       end
       
     end
