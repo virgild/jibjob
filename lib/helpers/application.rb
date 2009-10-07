@@ -39,12 +39,6 @@ module JibJob
       def error_messages_for(subject)
         haml(:complaints, :layout => false, :locals => { :subject => subject })
       end
-      
-      def send_welcome_email(user)
-        # body = erb(:welcome_email, {}, :user => user)
-        # Pony.mail(:to => user.email, :from => JibJob::App.noreply_email, 
-        #   :subject => "Welcome to JibJob", :body => body, :via => :sendmail)
-      end
             
     end #App
   end #Helpers

@@ -6,6 +6,7 @@
     :host:
   :cookie_secret: 
   :email:
+    :server:
     :noreply: no-reply@local
   :recaptcha:
     :public_key:
@@ -19,6 +20,7 @@
     :host:
   :cookie_secret:
   :email:
+    :server:
     :noreply: no-reply@local
   :recaptcha:
     :public_key:
@@ -33,6 +35,7 @@
     :password: 
   :cookie_secret: 
   :email:
+    :server:
     :noreply: no-reply@local
   :recaptcha:
     :public_key:

@@ -6,6 +6,7 @@ require File.join(File.dirname(__FILE__), "helpers/starters")
 require File.join(File.dirname(__FILE__), "helpers/recaptcha")
 require File.join(File.dirname(__FILE__), "helpers/link")
 require File.join(File.dirname(__FILE__), "helpers/cookie")
+require File.join(File.dirname(__FILE__), "helpers/mail")
 
 module JibJob
   module Helpers
@@ -17,6 +18,7 @@ module JibJob
     include Rack::Utils
     include LinkHelper
     include CookieHelper
+    include MailHelper
     include Recaptcha::ClientHelper
     include Recaptcha::Verify
     alias :h :escape_html

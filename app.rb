@@ -80,6 +80,7 @@ module JibJob
     enable :methodoverride, :logging
     set :cookie_secret, Proc.new { @@_app_config[environment][:cookie_secret] }
     set :noreply_email, Proc.new { @@_app_config[environment][:email][:noreply] }
+    set :email_server, Proc.new { @@_app_config[environment][:email][:server] }
     set :recaptcha_pubkey, Proc.new { @@_app_config[environment][:recaptcha][:public_key] }
     set :recaptcha_privkey, Proc.new { @@_app_config[environment][:recaptcha][:private_key] }
     
@@ -128,6 +129,13 @@ module JibJob
                                  :expire_after => 3600 * 24,
                                  :secret => self.cookie_secret
       use Rack::Flash
+    end
+    
+    # SMTP server
+    smtp_server = self.email_server
+    Mail.defaults do
+      smtp smtp_server
+      disable_tls
     end
 
     # Before filter
