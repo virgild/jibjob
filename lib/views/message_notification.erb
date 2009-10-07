@@ -1,0 +1,10 @@
+JibJob Message Received
+-----------------------
+
+Resume: <%= resume.name %>
+From: <%= message.from %> <<%= message.email %>>
+Date: <%= message.created_at.strftime("%I:%M%p %m/%d/%Y (%Z)") %>
+Subject: <%= message.subject %>
+Message:
+
+<%= message.body %>

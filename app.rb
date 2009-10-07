@@ -12,14 +12,14 @@ gems = [
   ['haml', '>= 2.2.4'],
   ['bcrypt-ruby', '>= 2.1.2'],
   ['uuidtools', '>= 2.0.0'],
-  ['resumetools', '>= 0.2.6'],
+  ['resumetools', '>= 0.2.7.1'],
   ['dm-core', '>= 0.10.1'],
   ['dm-timestamps', '>= 0.10.1'],
   ['dm-aggregates', '>= 0.10.1'],
   ['dm-constraints', '>= 0.10.1'],
   ['dm-is-viewable', '>= 0.10.1'],
   ['dm-validations', '>= 0.10.1'],
-  ['sanitize', '>= 1.0.8']
+  ['sanitize', '>= 1.0.8.4']
 ]
 
 gems.each do |name, version|
@@ -62,6 +62,7 @@ require dir / 'lib' / 'user'
 require dir / 'lib' / 'resume'
 require dir / 'lib' / 'message'
 require dir / 'lib' / 'helpers'
+require dir / 'lib' / 'mail'
 
 
 def root_path(*args)
@@ -79,6 +80,7 @@ module JibJob
     enable :methodoverride, :logging
     set :cookie_secret, Proc.new { @@_app_config[environment][:cookie_secret] }
     set :noreply_email, Proc.new { @@_app_config[environment][:email][:noreply] }
+    set :email_server, Proc.new { @@_app_config[environment][:email][:server] }
     set :recaptcha_pubkey, Proc.new { @@_app_config[environment][:recaptcha][:public_key] }
     set :recaptcha_privkey, Proc.new { @@_app_config[environment][:recaptcha][:private_key] }
     
@@ -127,6 +129,13 @@ module JibJob
                                  :expire_after => 3600 * 24,
                                  :secret => self.cookie_secret
       use Rack::Flash
+    end
+    
+    # SMTP server
+    smtp_server = self.email_server
+    Mail.defaults do
+      smtp smtp_server
+      disable_tls
     end
 
     # Before filter
@@ -373,6 +382,7 @@ module JibJob
       msg.body = Sanitize.clean(params[:message][:body])
       
       if msg.save
+        send_message_notification(msg)
         "OK".to_json
       else
         status 409

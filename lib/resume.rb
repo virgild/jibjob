@@ -80,13 +80,7 @@ module JibJob
     end
     
     def header_lines(options={})
-      elements = Array.new
-      [:address1, :address2, :telephone, :email, :url].each do |element|
-        elements << self.send(element) unless self.send(element).blank?
-      end
-      lines = Array.new
-      elements.each_slice(2) { |pair| lines << pair.join(" • ") }
-      lines
+      data.header_lines
     end
     
     def render_pdf(options={})
