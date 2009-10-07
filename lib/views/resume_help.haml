@@ -1,24 +1,118 @@
 .content
-  %div
+  .help
+    %h1 Writing Resumes in JibJob Text Format
+    %p
+      Writing a resume in JibJob Text Format allows you to create a document
+      that focuses on the content and not the layout or formatting. The different 
+      parts of a resume document is outlined below.
+      
+  .help
     %h1 Header
     %p
-      The header contains the name and the contact information that 
-      appears on top of the resume.
+      The header contains the name and contact information that 
+      appears at the top of the resume.
+    %h4 Header Format
+    .format
+      :plain
+        #N - Full name<br/>
+        #T - Telephone<br/>
+        #E - E-mail address<br/>
+        #A - Address<br/>
+        #U - Website URL<br/>
 
-  %div
+  .help
     %h1 Sections
     %p
-      Sections are the main areas of the resume
+      Sections are the main divisions of the resume.
     
-    %h1 Paragraph
+    %h4 Section Format
+    .format
+      :plain
+        = Section Title
+  
+  .help
+    %h2 Paragraph
     %p
       Sections can begin with a paragraph.
+    %h4 Paragraph Format
+    .format
+      :plain
+        ---<br/>
+        This is a section paragraph.<br/>
+        ---
   
-    %h1 Periods
+  .help
+    %h2 Periods
     %p
-      Periods have a name, organization, location, dates, and items
+      Periods are used to describe chronological items such as employment or education. 
+      They have a name, organization, location, dates, and a list of items.
+    %h4 Period Format
+    .format
+      :plain
+        + Period Title<br/>
+        &gt;O Organization Name<br/>
+        &gt;L Location<br/>
+        &gt;D Start Date to End Date
     
-    %h1 Items
+  .help
+    %h2 Items
     %p
-      Items are invidivudal bulleted text. They can also be placed directly
-      under a section.
+      Items are invidivudal bulleted text. They can be placed directly
+      under a section or a period.
+    %h4 Item Format
+    .format
+      :plain
+        - Item description<br/>
+  
+  .help
+    %h1 Resume Example
+    .format
+      :plain
+        #N Thomas B. Seeker<br/>
+        #A 1234 Northern Star Circle<br/>
+        #A Baltimore, MD 12345<br/>
+        #T (410) 555-1212<br/>
+        #E seeker@nettcom.com<br/>
+        #U http://nettcom.com/tseeker<br/>
+        <br/>
+        = Career Goal<br/>
+        ---<br/>
+        Client Server Systems Architect for a high technology firm<br/>
+        ---<br/>
+        <br/>
+        = Qualifications Summary<br/>
+        ---<br/>
+        Nine years of experience in designing, installing, and troubleshooting 
+        computing systems; a proven track record in identifying problems and 
+        developing innovative solutions.<br/>
+        ---<br/>
+        <br/>
+        - PROGRAMMING: C, C++, Visual BASIC, FORTRAN, Pascal, SQL, OSF/Motif<br/>
+        - OPERATING SYSTEMS: UNIX (bsd & SVr3/r4), MS Windows, MS DOS, MS Windows NT<br/>
+        - NETWORKING: TCP/IP, OSI, Microsoft LAN Manager, Novell Netware<br/>
+        - APPLICATIONS: Microsoft Office, Microsoft Access, Microsoft Visual C++,
+          Microsoft Project<br/>
+        <br/>
+        = Work Experience<br/>
+        + Systems Engineer<br/>
+        >O Computer Engineering Corporation<br/>
+        >L Los Angeles, CA<br/>
+        >D 1993 to Present<br/>
+        - Provide systems engineering, software engineering as a member of the Systems Integration Division of a software engineering consulting company.<br/>
+        - Designed and managed the development of an enterprise-level client/server automated auditing application for a major financial management company.<br/>
+        - Designed an enterprise level, high performance, mission-critical, client/server database system incorporating symmetric multiprocessing computers (SMP)<br/>
+        <br/>
+        + Systems Analyst<br/>
+        >O Business Consultants, Inc.<br/>
+        >L Washington, DC<br/>
+        >D 1990 to 1993<br/>
+        - Provided technical consulting services to the Smithsonian Institute's Information Technology Services Group, Amnesty International, and internal research and development initiatives.<br/>
+        - Consolidated and documented the Smithsonian Laboratory's Testing, Demonstration, and Training databases onto a single server, maximizing the use of the laboratory's computing resources.<br/>
+        <br/>
+        = Education<br/>
+        + Computer Systems Technology Program<br/>
+        >O Air Force Institute of Technology (AFIT)<br/>
+        <br/>
+        + BS, Mathematics/Computer Science<br/>
+        >O University of California, Los Angeles (UCLA)<br/>
+        <br/>
