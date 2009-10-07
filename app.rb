@@ -19,7 +19,7 @@ gems = [
   ['dm-constraints', '>= 0.10.1'],
   ['dm-is-viewable', '>= 0.10.1'],
   ['dm-validations', '>= 0.10.1'],
-  ['sanitize', '>= 1.0.8']
+  ['sanitize', '>= 1.0.8.4']
 ]
 
 gems.each do |name, version|
