@@ -1,5 +1,6 @@
 JibJob
-http://virgild.github.com/jibjob
+------
+http://codaset.com/virgil/jibjob
 
 
 JibJob is an online resume document generator . It is a simple service that 
@@ -9,14 +10,16 @@ in Ruby.
 
 
 Developer Notes
+---------------
 
 The code is still in cleanup stage and has the following limitations:
-  * The data migration code is for MySQL only, although there is no MySQL specific SQL in the DataMapper models.
-    Still waiting for dm-migrations to stabilize a bit.
-  * Lots of untested/uncovered code--mostly in the controllers methods
+
+* The data migration code is for MySQL only, although there is no MySQL specific SQL in the DataMapper models. Still waiting for dm-migrations to stabilize a bit.
+* Lots of untested/uncovered code--mostly in the controllers methods
 
 
 LICENSE
+-------
 
 JibJob, Copyright (c) 2009 Virgil Dimaguila
 
