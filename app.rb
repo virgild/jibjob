@@ -382,6 +382,7 @@ module JibJob
       msg.body = Sanitize.clean(params[:message][:body])
       
       if msg.save
+        send_message_notification(msg)
         "OK".to_json
       else
         status 409
