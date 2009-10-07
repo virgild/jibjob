@@ -62,6 +62,7 @@ require dir / 'lib' / 'user'
 require dir / 'lib' / 'resume'
 require dir / 'lib' / 'message'
 require dir / 'lib' / 'helpers'
+require dir / 'lib' / 'mail'
 
 
 def root_path(*args)
