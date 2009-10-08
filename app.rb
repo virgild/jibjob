@@ -83,6 +83,7 @@ module JibJob
     set :email_server, Proc.new { @@_app_config[environment][:email][:server] }
     set :recaptcha_pubkey, Proc.new { @@_app_config[environment][:recaptcha][:public_key] }
     set :recaptcha_privkey, Proc.new { @@_app_config[environment][:recaptcha][:private_key] }
+    set :google_analytics_id, Proc.new { @@_app_config[environment][:google_analytics_id] }
     
     db_config = @@_app_config[environment][:db]
     
