@@ -77,7 +77,7 @@ module JibJob
     set :app_file, __FILE__
     set :root, File.dirname(__FILE__)
     set :views, Proc.new { File.join(File.dirname(__FILE__), "lib/views") }
-    enable :methodoverride, :logging
+    enable :methodoverride
     set :cookie_secret, Proc.new { @@_app_config[environment][:cookie_secret] }
     set :noreply_email, Proc.new { @@_app_config[environment][:email][:noreply] }
     set :email_server, Proc.new { @@_app_config[environment][:email][:server] }
@@ -104,10 +104,9 @@ module JibJob
       require 'ruby-debug'
       require 'lib/reloader'
       
-      enable :show_exceptions, :static, :dump_errors
+      enable :static
       set :public, Proc.new { File.join(root, "static") }
       use JibJob::Reloader, self
-      use Rack::Lint
     end
     
     # Test config
