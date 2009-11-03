@@ -5,7 +5,7 @@
     %meta{ :name => "copyright", :content => "Copyright 2009 by Roundysoft" }
     %meta{ :name => "description", :content => "JibJob - Quick Resume Generator" }
     %title<= @title
-    - ["reset", "main", "buttons"].each do |css|
+    - ["reset", "main", "clearfix", "buttons"].each do |css|
       %link{ :rel => "stylesheet", :type => "text/css", 
              :href => "/css/#{css}.css", :media => "screen, projection" }
     - ["jquery", "app"].each do |js|
