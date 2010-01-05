@@ -16,7 +16,6 @@ gems = [
   ['dm-timestamps', '>= 0.10.1'],
   ['dm-aggregates', '>= 0.10.1'],
   ['dm-constraints', '>= 0.10.1'],
-  ['dm-is-viewable', '>= 0.10.1'],
   ['dm-validations', '>= 0.10.1'],
   ['sanitize', '>= 1.0.8.4'],
   ['sinatra', '>= 0.10.1']
@@ -52,7 +51,6 @@ require 'dm-core'
 require 'dm-timestamps'
 require 'dm-aggregates'
 require 'dm-constraints'
-require 'dm-is-viewable'
 require 'dm-validations'
 
 
