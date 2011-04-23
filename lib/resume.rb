@@ -108,7 +108,8 @@ module JibJob
     end
     
     def generate_access_cookie(ip_address)
-      OpenSSL::HMAC.hexdigest(OpenSSL::Digest::SHA1.new, self.access_code, ip_address)
+      code = self.access_code.blank? ? "JIBJOB" : self.access_code
+      OpenSSL::HMAC.hexdigest(OpenSSL::Digest::SHA1.new, code, ip_address)
     end
     
     def has_unread_messages?

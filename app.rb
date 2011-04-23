@@ -7,7 +7,6 @@ require 'rubygems'
 
 gems = [
   ['extlib', '>= 0.9.13'],
-  ['sinatra', '>= 0.10.1'],
   ['nakajima-rack-flash', '>= 0.1.0'],
   ['haml', '>= 2.2.4'],
   ['bcrypt-ruby', '>= 2.1.2'],
@@ -17,14 +16,14 @@ gems = [
   ['dm-timestamps', '>= 0.10.1'],
   ['dm-aggregates', '>= 0.10.1'],
   ['dm-constraints', '>= 0.10.1'],
-  ['dm-is-viewable', '>= 0.10.1'],
   ['dm-validations', '>= 0.10.1'],
-  ['sanitize', '>= 1.0.8.4']
+  ['sanitize', '>= 1.0.8.4'],
+  ['sinatra', '>= 0.10.1']
 ]
 
 gems.each do |name, version|
-  if File.directory?(File.expand_path(File.dirname(__FILE__) + "/../vendor/#{name}"))
-    $:.unshift "#{File.dirname(__FILE__)}/../vendor/#{name}/lib"
+  if File.directory?(File.expand_path(File.dirname(__FILE__) + "/vendor/#{name}"))
+    $:.unshift "#{File.dirname(__FILE__)}/vendor/#{name}/lib"
     require name
   else
     if version
@@ -52,7 +51,6 @@ require 'dm-core'
 require 'dm-timestamps'
 require 'dm-aggregates'
 require 'dm-constraints'
-require 'dm-is-viewable'
 require 'dm-validations'
 
 
@@ -77,7 +75,7 @@ module JibJob
     set :app_file, __FILE__
     set :root, File.dirname(__FILE__)
     set :views, Proc.new { File.join(File.dirname(__FILE__), "lib/views") }
-    enable :methodoverride, :logging
+    enable :methodoverride
     set :cookie_secret, Proc.new { @@_app_config[environment][:cookie_secret] }
     set :noreply_email, Proc.new { @@_app_config[environment][:email][:noreply] }
     set :email_server, Proc.new { @@_app_config[environment][:email][:server] }
@@ -104,10 +102,9 @@ module JibJob
       require 'ruby-debug'
       require 'lib/reloader'
       
-      enable :show_exceptions, :static, :dump_errors
+      enable :static
       set :public, Proc.new { File.join(root, "static") }
       use JibJob::Reloader, self
-      use Rack::Lint
     end
     
     # Test config

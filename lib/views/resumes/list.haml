@@ -10,7 +10,7 @@
   - if current_user.has_resume?
     %ul.nicelist
       - current_user.resumes.each_with_index do |resume, index|
-        %li
+        %li.clearfix
           %a.name{:href => "/resumes/#{resume.id}.html"} #{h resume.name}
           .buttons
             %a{:href => "/resumes/#{resume.id}/edit"} Edit
@@ -26,6 +26,5 @@
               %br
               Access Code: 
               %span.access_code #{h resume.access_code}
-          .clear
   - else
     %h3 You have no resumes.
