@@ -1,3 +1,8 @@
+Rails Edition (2015)
+-------------
+
+New in 2015 - The Rails edition of this app is now in http://github.com/virgild/jibjob-rails.
+
 JibJob
 ------
 http://codaset.com/virgil/jibjob
